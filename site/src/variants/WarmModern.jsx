@@ -333,10 +333,6 @@ export default function WarmModern() {
 
       {/* ── Why ───────────────────────────── */}
       <section className="wm-why">
-        <video className="wm-why-video" autoPlay muted loop playsInline
-          poster="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=1400&auto=format&q=80">
-          <source src="https://videos.pexels.com/video-files/3843536/3843536-hd_1920_1080_30fps.mp4" type="video/mp4" />
-        </video>
         <div className="wm-why-inner">
           <Reveal>
             <h2 className="wm-why-h2">

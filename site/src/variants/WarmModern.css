@@ -483,35 +483,20 @@
 
 /* ── WHY ─────────────────────────────── */
 .wm-why {
-  position: relative;
-  background: var(--text);
+  background: var(--surface);
   padding: 8rem 3.5rem;
-  overflow: hidden;
 }
-.wm-why-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.18) saturate(0.45);
-  opacity: 0.42;
-  z-index: 0;
-}
-.wm-why-inner {
-  position: relative;
-  z-index: 1;
-}
+.wm-why-inner {}
 .wm-why-h2 {
   font-size: clamp(2.5rem, 4.5vw, 4.5rem);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.03em;
-  color: var(--bg);
+  color: var(--text);
   max-width: 22ch;
   margin-bottom: 5rem;
 }
-.wm-why-h2 em { font-style: italic; font-weight: 300; color: var(--accent2); }
+.wm-why-h2 em { font-style: italic; font-weight: 300; color: var(--accent); }
 .wm-why-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -520,17 +505,17 @@
 .wm-why-entry {
   position: relative;
   padding: 2.5rem 0;
-  border-bottom: 1px solid rgba(250, 247, 242, 0.1);
+  border-bottom: 1px solid var(--border);
   overflow: hidden;
 }
-.wm-why-entry:nth-child(-n+2) { border-top: 1px solid rgba(250, 247, 242, 0.1); }
+.wm-why-entry:nth-child(-n+2) { border-top: 1px solid var(--border); }
 .wm-why-ghost-n {
   position: absolute;
   top: -0.5rem;
   right: 0;
   font-size: 6rem;
   font-weight: 700;
-  color: rgba(250, 247, 242, 0.04);
+  color: rgba(184, 92, 56, 0.07);
   line-height: 1;
   letter-spacing: -0.04em;
   pointer-events: none;
@@ -540,7 +525,7 @@
 .wm-why-entry h3 {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--bg);
+  color: var(--text);
   margin-bottom: 0.75rem;
   letter-spacing: -0.02em;
   line-height: 1.35;
@@ -548,7 +533,7 @@
 .wm-why-entry p {
   font-size: 0.88rem;
   font-weight: 300;
-  color: rgba(250, 247, 242, 0.55);
+  color: var(--muted);
   line-height: 1.75;
   max-width: 42ch;
 }
@@ -674,7 +659,6 @@
   .wm-marquee-track { animation-play-state: paused; }
   .wm-hero-video,
   .wm-video-strip video,
-  .wm-why-video,
   .wm-biz-img-wrap video {
     /* Videos continue to autoplay but we respect the user preference
        by removing any CSS-driven motion effects on the elements */

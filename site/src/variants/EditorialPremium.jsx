@@ -233,10 +233,6 @@ export default function EditorialPremium() {
       {/* ── No Filter ─────────────────────── */}
       <SlideIn>
         <section className="ep-nf">
-          <video className="ep-nf-video-bg" autoPlay muted loop playsInline
-            poster="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1400&auto=format&q=80">
-            <source src="https://videos.pexels.com/video-files/3571264/3571264-hd_1920_1080_25fps.mp4" type="video/mp4" />
-          </video>
           <div className="ep-nf-sidebar">
             <div className="ep-biz-num">03</div>
             <span className="ep-biz-tag">No Filter</span>
@@ -260,10 +256,6 @@ export default function EditorialPremium() {
       {/* ── Architecture ──────────────────── */}
       <SlideIn>
         <section className="ep-arch" id="arch">
-          <video className="ep-arch-video" autoPlay muted loop playsInline
-            poster="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1400&auto=format&q=80">
-            <source src="https://videos.pexels.com/video-files/2882090/2882090-hd_1920_1080_30fps.mp4" type="video/mp4" />
-          </video>
           <div className="ep-arch-inner">
             <div className="ep-arch-split">
               <div className="ep-arch-lead">
