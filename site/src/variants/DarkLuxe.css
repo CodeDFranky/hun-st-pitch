@@ -2,12 +2,12 @@
 
 .dl {
   --bg:       #0C0A08;
-  --surface:  #141210;
-  --surface2: #1B1714;
+  --surface:  #181513;
+  --surface2: #1F1A16;
   --text:     #EDE7DE;
-  --muted:    #7A7268;
+  --muted:    #928879;
   --accent:   #C4A96B;
-  --border:   rgba(196, 169, 107, 0.1);
+  --border:   rgba(196, 169, 107, 0.12);
 
   background-color: var(--bg);
   color: var(--text);
@@ -81,7 +81,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.28) saturate(0.55);
+  filter: brightness(0.38) saturate(0.62);
 }
 .dl-hero-video-overlay {
   position: absolute;
@@ -222,9 +222,12 @@
 }
 .dl-studio-rn {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 0.95rem;
-  color: rgba(196, 169, 107, 0.55);
+  font-size: 1.05rem;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(196, 169, 107, 0.5);
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
   transition: color 0.35s ease;
 }
 .dl-studio-rcopy {
@@ -242,7 +245,7 @@
 .dl-studio-rg {
   font-size: 0.78rem;
   font-weight: 300;
-  color: rgba(122, 114, 104, 0.85);
+  color: rgba(146, 136, 121, 0.9);
   line-height: 1.55;
   max-width: 48ch;
   transition: color 0.35s ease;
@@ -479,10 +482,12 @@
 }
 .dl-tableone-rn {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem;
-  font-weight: 300;
-  color: rgba(196, 169, 107, 0.55);
+  font-size: 1.4rem;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(196, 169, 107, 0.5);
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
   transition: color 0.4s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .dl-tableone-rt {
@@ -559,15 +564,15 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.3) saturate(0.45);
+  filter: brightness(0.42) saturate(0.55);
 }
 .dl-nf-bg::after {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 30% 30%, rgba(12, 10, 8, 0.45) 0%, rgba(12, 10, 8, 0.92) 70%),
-    linear-gradient(180deg, rgba(12, 10, 8, 0.6) 0%, rgba(12, 10, 8, 0.85) 100%);
+    radial-gradient(ellipse at 30% 30%, rgba(12, 10, 8, 0.28) 0%, rgba(12, 10, 8, 0.78) 70%),
+    linear-gradient(180deg, rgba(12, 10, 8, 0.42) 0%, rgba(12, 10, 8, 0.7) 100%);
 }
 /* ── NO FILTER: exhibit (auto-cycle) ─────── */
 .dl-nf-exhibit {
@@ -622,10 +627,12 @@
   align-items: baseline;
   gap: 0.5rem;
   font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
   color: var(--accent);
   font-variant-numeric: tabular-nums;
   font-size: clamp(3rem, 6vw, 5rem);
   font-weight: 300;
+  letter-spacing: 0.005em;
   line-height: 1;
 }
 .dl-nf-feature-sep {
@@ -720,7 +727,7 @@
   font-weight: 400;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(122, 114, 104, 0.75);
+  color: rgba(146, 136, 121, 0.82);
   transition: color 0.35s ease;
 }
 .dl-nf-seg.is-active .dl-nf-seg-label { color: var(--accent); }
@@ -745,13 +752,13 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.18) saturate(0.5);
+  filter: brightness(0.34) saturate(0.6);
   z-index: 0;
 }
 .dl-arch-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, rgba(20, 18, 16, 0.4) 0%, rgba(12, 10, 8, 0.85) 80%);
+  background: radial-gradient(ellipse at center, rgba(24, 21, 19, 0.3) 0%, rgba(12, 10, 8, 0.72) 80%);
   z-index: 1;
 }
 .dl-arch-inner {
@@ -854,12 +861,14 @@
 
 .dl-arch-n {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 4rem;
+  font-size: 3.6rem;
   font-weight: 300;
+  font-style: italic;
   color: var(--accent);
   line-height: 1;
   margin-bottom: 1.25rem;
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0.005em;
   opacity: 0.78;
   transition: opacity 0.4s ease, text-shadow 0.4s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -936,9 +945,12 @@
 .dl-why-item.is-open { padding: 2.25rem 0 2.5rem; }
 .dl-why-n {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
-  font-weight: 300;
-  color: rgba(196, 169, 107, 0.6);
+  font-size: 1.05rem;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(196, 169, 107, 0.5);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
   padding-top: 0.55rem;
   transition: color 0.35s ease, transform 0.35s ease;
 }
@@ -1030,9 +1042,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.12) saturate(0.4);
+  filter: brightness(0.28) saturate(0.5);
   z-index: 0;
-  opacity: 0.5;
+  opacity: 0.55;
 }
 .dl-cta-inner {
   position: relative;
@@ -1081,7 +1093,7 @@
   font-size: 0.68rem;
   font-weight: 300;
   letter-spacing: 0.1em;
-  color: rgba(122, 114, 104, 0.5);
+  color: rgba(146, 136, 121, 0.65);
   text-transform: uppercase;
 }
 
