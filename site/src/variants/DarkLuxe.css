@@ -1427,11 +1427,14 @@
 }
 
 /* ── EXTRA-WIDE SCREENS (1480px+) ────── */
-/* Nav, rule, and footer align with the 1320px content max inside sections.  */
+/* Nav, hero, rule, and footer align with the 1320px content max.  */
 @media (min-width: 1480px) {
   .dl-nav {
     padding-left: calc(50% - 660px);
     padding-right: calc(50% - 660px);
+  }
+  .dl-hero-text {
+    padding-left: calc(50% - 660px);
   }
   .dl-rule {
     margin-left: auto;
