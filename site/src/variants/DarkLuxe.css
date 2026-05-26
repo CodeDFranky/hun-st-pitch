@@ -1253,6 +1253,20 @@
   will-change: transform;
 }
 
+/* ── LARGE SCREEN CONTENT CONSTRAINT ─── */
+/* Sections stay full-bleed; inner wrappers cap at 1320px and self-center.  */
+/* max-width is a no-op below ~1480px where section padding already limits.  */
+.dl-studio-inner,
+.dl-tableone-inner,
+.dl-arch-inner,
+.dl-nf-exhibit,
+.dl-why-split,
+.dl-cta-inner {
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* ── RESPONSIVE ──────────────────────── */
 @media (max-width: 900px) {
   .dl-nav { padding: 1.25rem 1.5rem; }
@@ -1409,6 +1423,24 @@
   }
   .dl-hero-body {
     margin-bottom: 1.75rem;
+  }
+}
+
+/* ── EXTRA-WIDE SCREENS (1480px+) ────── */
+/* Nav, rule, and footer align with the 1320px content max inside sections.  */
+@media (min-width: 1480px) {
+  .dl-nav {
+    padding-left: calc(50% - 660px);
+    padding-right: calc(50% - 660px);
+  }
+  .dl-rule {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1320px;
+  }
+  .dl-footer {
+    padding-left: calc(50% - 660px);
+    padding-right: calc(50% - 660px);
   }
 }
 
