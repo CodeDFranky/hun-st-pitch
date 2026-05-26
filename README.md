@@ -24,6 +24,8 @@ The design and the content are both part of the answer. One shows I can build be
 
 Completed in under 24 hours using an agentic workflow with Claude Code. Brief, content, architecture proposals, and creative direction are mine — Claude generated code under continuous direction and iteration.
 
+The reference video used Google Stitch for design. I went a different route: [Impeccable](https://impeccable.style/) for UI craft and [TasteSkill](https://www.tasteskill.dev/) for design direction. Both are Claude Code skills built specifically to avoid the AI slop problem the video calls out — Impeccable enforces design laws, TasteSkill shapes aesthetic decisions before a line of code is written.
+
 That workflow is the capability I'm applying to bring inside Hunt St.
 
 ---
