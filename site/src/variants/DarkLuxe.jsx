@@ -630,7 +630,6 @@ export default function DarkLuxe() {
             <a href="mailto:d.franco.ramos1@gmail.com" className="dl-cta-email">
               d.franco.ramos1@gmail.com
             </a>
-            <br />
             <a href="mailto:d.franco.ramos1@gmail.com" className="dl-btn-filled">
               Get in touch
             </a>
