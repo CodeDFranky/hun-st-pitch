@@ -1,30 +1,30 @@
-# Franco Ramos · AI Architect for Hunt St
+# Franco Ramos · Hunt St Assessment
 
-This repo is a job application. A pitch site I built to show David and the Hunt St team what an embedded AI Architect would actually look like across Studio, Table One, and No Filter.
+Hunt St sent me a reference video about building professional websites with Claude Code, and a brief: show your most creative and visually polished work.
 
-Live at **[hun-st-pitch.vercel.app](https://hun-st-pitch.vercel.app)**
+This is my response. Live at **[hun-st-pitch.vercel.app](https://hun-st-pitch.vercel.app)**
 
 ---
 
-## The pitch
+## What I built
 
-Hunt St runs three distinct businesses under one roof. What I'm proposing isn't three separate AI tool stacks — it's a single shared intelligence layer that compounds across all three, with each business getting purpose-built workflows on top.
+Rather than a generic demo, I built something specific to Hunt St's world — a single-page dark luxury site that walks through what an embedded AI Architect would actually deliver across Studio, Table One, and No Filter.
+
+The design and the content are both part of the answer. One shows I can build beyond AI slop. The other shows I've done the thinking about their business.
 
 | Business | What I'd build |
 |---|---|
-| **Studio** | Workspace generation, cost planning, builder communication loops, automated weekly status — so the design team ships faster with less overhead |
-| **Table One** | Feasibility modelling, fee proposals, pipeline rhythm, investor deck generation — the analytical layer that scales advisory capacity without scaling headcount |
-| **No Filter** | Brand voice consistency, content pipeline automation, AI-search optimisation, performance reporting — so the marketing output stays psychologically sharp at volume |
-
-The architecture section on the site explains how a unified data and memory layer makes each of these better, not just individually faster.
+| **Studio** | Workspace generation, cost planning, builder communication loops, automated weekly status |
+| **Table One** | Feasibility modelling, fee proposals, pipeline rhythm, investor deck generation |
+| **No Filter** | Brand voice consistency, content pipeline automation, AI-search optimisation, performance reporting |
 
 ---
 
-## How this was built
+## How it was built
 
-I built this site in under 24 hours using an agentic development workflow with Claude Code. The brief, content, architecture proposals, and creative direction are mine — Claude generated code under continuous direction and iteration.
+Completed in under 24 hours using an agentic workflow with Claude Code. Brief, content, architecture proposals, and creative direction are mine — Claude generated code under continuous direction and iteration.
 
-The speed and quality together are the proof of concept. It's the same way I'd work inside Hunt St.
+That workflow is the capability I'm applying to bring inside Hunt St.
 
 ---
 
