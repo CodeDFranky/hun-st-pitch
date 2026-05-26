@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import './EditorialPremium.css'
 
-/* MOTION_INTENSITY: 2 — almost static. Only hero entry + clean hover states. */
+/* MOTION_INTENSITY: 3 — word-level hero stagger, viewport list animations, arch/why entry stagger. */
 
 function SlideIn({ children, className }) {
   const ref = useRef(null)
@@ -17,6 +17,25 @@ function SlideIn({ children, className }) {
     >
       {children}
     </motion.div>
+  )
+}
+
+function WordReveal({ children, delay = 0 }) {
+  const words = children.split(' ')
+  return (
+    <>
+      {words.map((word, i) => (
+        <motion.span
+          key={i}
+          style={{ display: 'inline-block', marginRight: '0.28em' }}
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: delay + i * 0.06, ease: [0.25, 0.1, 0.25, 1] }}
+        >
+          {word}
+        </motion.span>
+      ))}
+    </>
   )
 }
 
@@ -37,6 +56,27 @@ const BIZ_DATA = [
     alt: 'Strategy workspace',
     systems: ['Feasibility Modelling Agent', 'Fee Proposal Generator', 'Pipeline Rhythm in Streak', 'Investor Deck Drafting Layer'],
   },
+]
+
+const NF_SERVICES = [
+  { h: 'Brand Voice Infrastructure', p: 'Founder interviews to voice guide to enforcement layer.' },
+  { h: 'Content Production Pipeline', p: 'LinkedIn, Instagram, EDM, short-form — calibrated per client.' },
+  { h: 'Performance Reporting', p: 'Meta, Google, LinkedIn Ads into client-ready narrative insights.' },
+  { h: 'AI-Search & SEO', p: 'GEO/AEO — keyword clustering, content briefs, schema markup.' },
+]
+
+const WHY_DATA = [
+  { h: "Production systems, not demos.", p: "Real systems running daily workflows for real businesses. I know where the failure modes are because I've already hit most of them." },
+  { h: "Hospitality is a specific context.", p: "I know what good creative output looks like, where AI lifts the needle, and where it creates noise. That specificity matters when you're building for Studio, Table One, and No Filter." },
+  { h: "Every decision has a clear reason.", p: "I can walk through any architecture call — why the agent works, why one didn't, what I'd change. No translator needed." },
+  { h: "I'll always have a view.", p: "On tools, architecture, sequencing, tradeoffs. I'll back every decision up, and change it when the evidence shifts." },
+]
+
+const ARCH_DATA = [
+  { h: 'Memory Architecture', p: "Compounds across businesses. What Studio learns informs Table One's models." },
+  { h: 'Evaluation Built In', p: 'Every agent has observability. You know when one fails before it matters.' },
+  { h: 'Cross-Business Learning', p: "No Filter's performance data sharpens the brand voice layer over time." },
+  { h: 'Documentation First', p: 'Architecture that survives a two-week holiday and scales beyond one person.' },
 ]
 
 export default function EditorialPremium() {
@@ -67,14 +107,11 @@ export default function EditorialPremium() {
           >
             AI Architect for Hunt St
           </motion.p>
-          <motion.h1
-            className="ep-hero-h1"
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.3, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-          >
-            The systems that compound<br />while <em>you sleep.</em>
-          </motion.h1>
+          <h1 className="ep-hero-h1">
+            <WordReveal delay={0.4}>The systems that compound</WordReveal>
+            <br />
+            <WordReveal delay={0.7}>while you sleep.</WordReveal>
+          </h1>
           <motion.p
             className="ep-hero-body"
             initial={{ opacity: 0 }}
@@ -83,7 +120,7 @@ export default function EditorialPremium() {
           >
             I design and ship AI and automation systems for founder-led businesses.
             I own the architecture, build the agents, teach the team, and keep
-            extending the stack as we learn what works.
+            extending the stack as we learn what works together.
           </motion.p>
           <motion.a
             href="#biz"
@@ -110,7 +147,7 @@ export default function EditorialPremium() {
       </div>
 
       {/* ── Studio + Table One ─────────────── */}
-      {BIZ_DATA.map((biz, i) => (
+      {BIZ_DATA.map((biz) => (
         <SlideIn key={biz.num}>
           <section className="ep-biz">
             <div className="ep-biz-sidebar">
@@ -122,7 +159,17 @@ export default function EditorialPremium() {
                 <h2 className="ep-biz-h2">{biz.title}</h2>
                 <p className="ep-biz-sub">{biz.sub}</p>
                 <ul className="ep-systems">
-                  {biz.systems.map(s => <li key={s}>{s}</li>)}
+                  {biz.systems.map((s, idx) => (
+                    <motion.li
+                      key={s}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: idx * 0.07 }}
+                    >
+                      {s}
+                    </motion.li>
+                  ))}
                 </ul>
               </div>
               <div className="ep-biz-img">
@@ -143,14 +190,10 @@ export default function EditorialPremium() {
           <div className="ep-nf-main">
             <h2 className="ep-nf-h2">Psychology-Led<br />Marketing Studio</h2>
             <p className="ep-nf-sub">Brand voice, content, performance, growth</p>
-            <div className="ep-nf-grid">
-              {[
-                { h: 'Brand Voice Infrastructure', p: 'Founder interviews to voice guide to enforcement layer.' },
-                { h: 'Content Production Pipeline', p: 'LinkedIn, Instagram, EDM, short-form — calibrated per client.' },
-                { h: 'Performance Reporting', p: 'Meta, Google, LinkedIn Ads into client-ready narrative insights.' },
-                { h: 'AI-Search & SEO', p: 'GEO/AEO — keyword clustering, content briefs, schema markup.' },
-              ].map(item => (
-                <div key={item.h} className="ep-nf-item">
+            <div className="ep-nf-list">
+              {NF_SERVICES.map((item, i) => (
+                <div key={item.h} className="ep-nf-entry">
+                  <span className="ep-nf-entry-n">0{i + 1}</span>
                   <h4>{item.h}</h4>
                   <p>{item.p}</p>
                 </div>
@@ -163,21 +206,37 @@ export default function EditorialPremium() {
       {/* ── Architecture ──────────────────── */}
       <SlideIn>
         <section className="ep-arch" id="arch">
-          <h2 className="ep-arch-h2">
-            One AI layer.<br />Three businesses.<br /><em>Full ownership.</em>
-          </h2>
-          <div className="ep-arch-strip">
-            {[
-              { h: 'Memory Architecture', p: "Compounds across businesses. What Studio learns informs Table One's models." },
-              { h: 'Evaluation Built In', p: 'Every agent has observability. You know when one fails before it matters.' },
-              { h: 'Cross-Business Learning', p: "No Filter's performance data sharpens the brand voice layer over time." },
-              { h: 'Documentation First', p: 'Architecture that survives a two-week holiday and scales beyond one person.' },
-            ].map(item => (
-              <div key={item.h} className="ep-arch-item">
-                <h4>{item.h}</h4>
-                <p>{item.p}</p>
-              </div>
-            ))}
+          <div className="ep-arch-split">
+            <div className="ep-arch-lead">
+              <h2 className="ep-arch-h2">
+                One AI layer.<br />Three businesses.<br /><em>Full ownership.</em>
+              </h2>
+              <motion.div
+                className="ep-arch-first"
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0 }}
+              >
+                <span className="ep-arch-label">{ARCH_DATA[0].h}</span>
+                <p>{ARCH_DATA[0].p}</p>
+              </motion.div>
+            </div>
+            <div className="ep-arch-rest">
+              {ARCH_DATA.slice(1).map((item, i) => (
+                <motion.div
+                  key={item.h}
+                  className="ep-arch-entry"
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, delay: (i + 1) * 0.1 }}
+                >
+                  <h4>{item.h}</h4>
+                  <p>{item.p}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
       </SlideIn>
@@ -198,17 +257,22 @@ export default function EditorialPremium() {
               </p>
             </div>
           </div>
-          <div className="ep-why-items">
-            {[
-              { h: "I've done this before.", p: "Systems that run daily workflows for real businesses — not prototypes." },
-              { h: "I understand your industries.", p: "Hospitality, design, and growth marketing aren't generic contexts." },
-              { h: "I work with founders.", p: "I can explain why an agent works, why one didn't, and what to change." },
-              { h: "I have opinions.", p: "On tools, architecture, tradeoffs. Willing to be wrong. Always have a view." },
-            ].map(item => (
-              <div key={item.h} className="ep-why-item">
-                <h3>{item.h}</h3>
+          <div className="ep-why-entries">
+            {WHY_DATA.map((item, i) => (
+              <motion.div
+                key={item.h}
+                className="ep-why-entry"
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: i * 0.1 }}
+              >
+                <div className="ep-why-entry-head">
+                  <span className="ep-why-entry-n">0{i + 1}</span>
+                  <h3>{item.h}</h3>
+                </div>
                 <p>{item.p}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </section>
@@ -221,6 +285,9 @@ export default function EditorialPremium() {
             Ready to own<br />the AI <em>layer?</em>
           </h2>
           <div className="ep-cta-right">
+            <p className="ep-cta-body">
+              Available for a conversation, a working session, or a practical assessment — in whatever order makes sense.
+            </p>
             <a href="mailto:d.franco.ramos1@gmail.com" className="ep-cta-email">
               d.franco.ramos1@gmail.com
             </a>

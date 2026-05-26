@@ -1,8 +1,8 @@
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import './WarmModern.css'
 
-/* MOTION_INTENSITY: 4 — fluid reveals, tasteful transitions, tactile hover states */
+/* MOTION_INTENSITY: 5 — fluid reveals, scroll-driven scale, staggered entries */
 
 const ease = [0.25, 0.1, 0.25, 1]
 
@@ -22,7 +22,25 @@ function Reveal({ children, className, delay = 0 }) {
   )
 }
 
+const WHY_ITEMS = [
+  { h: "I've shipped this — not just planned it.", p: "Real systems running daily workflows for real businesses. I know where the failure modes are because I've already hit most of them." },
+  { h: "Hospitality and growth aren't abstract to me.", p: "I know what good creative output looks like, where AI lifts the needle, and where it creates noise. Studio, Table One, and No Filter each need specific thinking." },
+  { h: "You won't need to translate anything.", p: "I can walk through every call we make together — why an agent works, why one didn't, what I'd change next." },
+  { h: "I'll always bring a view — and back it up.", p: "On tools, architecture, sequencing, tradeoffs. And I'll change my mind when the evidence is good enough." },
+]
+
+const NF_SERVICES = [
+  { h: 'Brand Voice', p: 'Interviews to voice guide to enforcement layer across all content output.' },
+  { h: 'Content Pipeline', p: 'LinkedIn, Instagram, EDM, short-form — calibrated per client voice.' },
+  { h: 'Performance Reporting', p: 'Meta, Google, LinkedIn Ads into client-ready narrative insights.' },
+  { h: 'AI-Search & SEO', p: 'GEO/AEO — keyword clustering, content briefs, schema markup.' },
+]
+
 export default function WarmModern() {
+  const heroRef = useRef(null)
+  const { scrollY } = useScroll()
+  const heroScale = useTransform(scrollY, [0, 500], [1, 1.05])
+
   return (
     <div className="wm">
 
@@ -37,7 +55,7 @@ export default function WarmModern() {
       </nav>
 
       {/* ── Hero ──────────────────────────── */}
-      <section className="wm-hero">
+      <section className="wm-hero" ref={heroRef}>
         <div className="wm-hero-left">
           <motion.span
             className="wm-hero-tag"
@@ -63,7 +81,7 @@ export default function WarmModern() {
             transition={{ duration: 1, delay: 0.8 }}
           >
             For Hunt St, that means AI and automation across Studio, Table One,
-            and No Filter — designed, built, and extended as you learn what works.
+            and No Filter — designed, built, and extended as we learn what works together.
             Full ownership from day one.
           </motion.p>
           <motion.div
@@ -76,27 +94,33 @@ export default function WarmModern() {
             <a href="#contact" className="wm-btn-secondary">Get in touch ›</a>
           </motion.div>
         </div>
-        <div className="wm-hero-right">
+        <motion.div className="wm-hero-right" style={{ scale: heroScale }}>
+          <div className="wm-hero-right-overlay" />
           <img
             src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=900&auto=format&q=80"
             alt="Modern hospitality interior"
           />
-        </div>
+        </motion.div>
       </section>
 
-      {/* ── Strip ─────────────────────────── */}
-      <div className="wm-strip" id="systems">
-        {[
-          { h: 'Studio', p: 'Hospitality & retail design' },
-          { h: 'Table One', p: 'Strategy & advisory' },
-          { h: 'No Filter', p: 'Marketing & growth' },
-          { h: 'Three businesses', p: 'One connected AI layer' },
-        ].map(item => (
-          <div key={item.h} className="wm-strip-item">
-            <h4>{item.h}</h4>
-            <p>{item.p}</p>
-          </div>
-        ))}
+      {/* ── Marquee ───────────────────────── */}
+      <div className="wm-marquee" id="systems">
+        <div className="wm-marquee-track">
+          {[...Array(2)].map((_, outer) => (
+            <span key={outer} className="wm-marquee-group">
+              <span className="wm-marquee-item">Studio</span>
+              <span className="wm-marquee-dot">·</span>
+              <span className="wm-marquee-item">Table One</span>
+              <span className="wm-marquee-dot">·</span>
+              <span className="wm-marquee-item">No Filter</span>
+              <span className="wm-marquee-dot">·</span>
+              <span className="wm-marquee-item">Three businesses</span>
+              <span className="wm-marquee-dot">·</span>
+              <span className="wm-marquee-item">One AI layer</span>
+              <span className="wm-marquee-dot">·</span>
+            </span>
+          ))}
+        </div>
       </div>
 
       {/* ── Studio ────────────────────────── */}
@@ -113,10 +137,22 @@ export default function WarmModern() {
             <h2 className="wm-biz-h2">Hospitality &amp; Retail Design</h2>
             <p className="wm-biz-sub">All'Antico Vinaio, Racqueteer, Sea Salt Clovelly + others</p>
             <ul className="wm-systems">
-              <li>Project Workspace Generation</li>
-              <li>Cost Planning Agent — sketch to v0 cost plan</li>
-              <li>Builder Budget Revision Loop</li>
-              <li>Weekly Client Status Reporting Layer</li>
+              {[
+                'Project Workspace Generation',
+                'Cost Planning Agent — sketch to v0 cost plan',
+                'Builder Budget Revision Loop',
+                'Weekly Client Status Reporting Layer',
+              ].map((s, idx) => (
+                <motion.li
+                  key={s}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.07 }}
+                >
+                  {s}
+                </motion.li>
+              ))}
             </ul>
           </div>
         </section>
@@ -136,10 +172,22 @@ export default function WarmModern() {
             <h2 className="wm-biz-h2">Hospitality Strategy &amp; Advisory</h2>
             <p className="wm-biz-sub">Site sourcing, feasibility, lease, investor decks</p>
             <ul className="wm-systems">
-              <li>Feasibility Modelling Agent</li>
-              <li>Fee Proposal Generator — brief in, proposal out</li>
-              <li>Pipeline Rhythm in Streak</li>
-              <li>Investor Deck Drafting Layer</li>
+              {[
+                'Feasibility Modelling Agent',
+                'Fee Proposal Generator — brief in, proposal out',
+                'Pipeline Rhythm in Streak',
+                'Investor Deck Drafting Layer',
+              ].map((s, idx) => (
+                <motion.li
+                  key={s}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.07 }}
+                >
+                  {s}
+                </motion.li>
+              ))}
             </ul>
           </div>
         </section>
@@ -162,17 +210,22 @@ export default function WarmModern() {
               </p>
             </div>
           </div>
-          <div className="wm-nf-grid">
-            {[
-              { h: 'Brand Voice', p: 'Interviews to voice guide to enforcement layer across all content output.' },
-              { h: 'Content Pipeline', p: 'LinkedIn, Instagram, EDM, short-form — calibrated per client voice.' },
-              { h: 'Performance Reporting', p: 'Meta, Google, LinkedIn Ads into client-ready narrative insights.' },
-              { h: 'AI-Search & SEO', p: 'GEO/AEO — keyword clustering, content briefs, schema markup.' },
-            ].map(item => (
-              <div key={item.h} className="wm-nf-card">
-                <h4>{item.h}</h4>
-                <p>{item.p}</p>
-              </div>
+          <div className="wm-nf-list">
+            {NF_SERVICES.map((item, i) => (
+              <motion.div
+                key={item.h}
+                className="wm-nf-entry"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.08 }}
+              >
+                <span className="wm-nf-entry-n">0{i + 1}</span>
+                <div className="wm-nf-entry-body">
+                  <h4>{item.h}</h4>
+                  <p>{item.p}</p>
+                </div>
+              </motion.div>
             ))}
           </div>
         </section>
@@ -199,41 +252,53 @@ export default function WarmModern() {
               { n: '02', h: 'Evaluation Built In', p: 'Every agent has observability. You know when one fails before it matters.' },
               { n: '03', h: 'Cross-Business Learning', p: "No Filter's performance data sharpens the brand voice layer over time." },
               { n: '04', h: 'Documentation First', p: 'Architecture that survives change and scales beyond one person.' },
-            ].map(item => (
-              <div key={item.n} className="wm-arch-item">
+            ].map((item, i) => (
+              <motion.div
+                key={item.n}
+                className="wm-arch-item"
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+              >
                 <span className="wm-arch-n">{item.n}</span>
                 <div className="wm-arch-text">
                   <h4>{item.h}</h4>
                   <p>{item.p}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </section>
       </Reveal>
 
       {/* ── Why ───────────────────────────── */}
-      <Reveal>
-        <section className="wm-why">
+      <section className="wm-why">
+        <Reveal>
           <h2 className="wm-why-h2">
             I think at architecture level.<br />
             I ship at <em>"live by Friday."</em>
           </h2>
-          <div className="wm-why-grid">
-            {[
-              { h: "I've done this before.", p: "Not prototypes. Systems that run daily workflows for real businesses. I know where the failure modes are." },
-              { h: "I understand your industries.", p: "Hospitality, design, and growth aren't generic contexts. I know what good output looks like." },
-              { h: "I work with founders directly.", p: "I can explain why an agent works, why one didn't, and what I'd change. No translator needed." },
-              { h: "I have opinions.", p: "On tools, architecture, sequencing, and tradeoffs. Willing to be wrong. Always have a view." },
-            ].map(item => (
-              <div key={item.h} className="wm-why-item">
+        </Reveal>
+        <div className="wm-why-list">
+          {WHY_ITEMS.map((item, i) => (
+            <motion.div
+              key={item.h}
+              className="wm-why-entry"
+              initial={{ opacity: 0, x: i % 2 === 0 ? -24 : 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-5% 0px' }}
+              transition={{ duration: 0.7, delay: Math.floor(i / 2) * 0.12, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              <span className="wm-why-ghost-n" aria-hidden="true">0{i + 1}</span>
+              <div className="wm-why-entry-content">
                 <h3>{item.h}</h3>
                 <p>{item.p}</p>
               </div>
-            ))}
-          </div>
-        </section>
-      </Reveal>
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
       {/* ── CTA ───────────────────────────── */}
       <Reveal>
@@ -242,6 +307,9 @@ export default function WarmModern() {
           <h2 className="wm-cta-h2">
             Ready to own<br />the <span>AI layer?</span>
           </h2>
+          <p className="wm-cta-body">
+            Available for a conversation, a working session, or a practical assessment — in whatever order makes sense for you.
+          </p>
           <a href="mailto:d.franco.ramos1@gmail.com" className="wm-cta-email">
             d.franco.ramos1@gmail.com
           </a>
