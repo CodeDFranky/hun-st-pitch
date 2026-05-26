@@ -318,7 +318,13 @@ function NFSection() {
           <h2 className="dl-nf-h2">Psychology-Led<br />Marketing Studio</h2>
           <p className="dl-nf-sub">Brand voice · Content · Performance · AI-Search</p>
         </div>
-        <div className="dl-nf-stage">
+        <div
+          className="dl-nf-stage"
+          id="dl-nf-panel"
+          role="tabpanel"
+          aria-labelledby={`dl-nf-tab-${active}`}
+          aria-live="polite"
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
@@ -347,8 +353,10 @@ function NFSection() {
             <button
               type="button"
               key={item.h}
+              id={`dl-nf-tab-${i}`}
               role="tab"
               aria-selected={active === i}
+              aria-controls="dl-nf-panel"
               aria-label={`Show ${item.h}`}
               className={[
                 'dl-nf-seg',
