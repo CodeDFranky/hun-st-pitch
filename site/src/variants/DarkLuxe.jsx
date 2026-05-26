@@ -1,6 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useInView } from 'framer-motion'
+import gsap from 'gsap'
+import { SplitText } from 'gsap/SplitText'
+import Lenis from 'lenis'
+import Cursor from '../components/Cursor'
+import { useTilt } from '../components/useTilt'
+import { useMagnetic } from '../components/useMagnetic'
 import './DarkLuxe.css'
+
+gsap.registerPlugin(SplitText)
 
 const ease = [0.165, 0.84, 0.44, 1]
 
@@ -99,33 +107,52 @@ function ArchHeading() {
   )
 }
 
+function MagneticWrap({ children, style }) {
+  const { ref, onMouseMove, onMouseLeave } = useMagnetic()
+  return (
+    <div ref={ref} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}
+         style={{ display: 'inline-block', ...style }}>
+      {children}
+    </div>
+  )
+}
+
+function ArchPanel({ item, i }) {
+  const { ref, onMouseMove, onMouseLeave } = useTilt()
+  return (
+    <motion.article
+      ref={ref}
+      className={`dl-arch-panel dl-arch-panel--${item.n}`}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-8% 0px' }}
+      transition={{ duration: 0.85, delay: i * 0.12, ease }}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+    >
+      <img
+        className="dl-arch-panel-img"
+        src={item.img}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+      />
+      <div className="dl-arch-panel-overlay" aria-hidden="true" />
+      <div className="dl-arch-panel-content">
+        <span className="dl-arch-panel-n">{item.n}</span>
+        <h3 className="dl-arch-panel-t">{item.title}</h3>
+        <p className="dl-arch-panel-d">{item.desc}</p>
+      </div>
+    </motion.article>
+  )
+}
+
 function ArchGallery() {
   return (
     <div className="dl-arch-gallery">
       {ARCH_ITEMS.map((item, i) => (
-        <motion.article
-          key={item.n}
-          className={`dl-arch-panel dl-arch-panel--${item.n}`}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-8% 0px' }}
-          transition={{ duration: 0.85, delay: i * 0.12, ease }}
-        >
-          <img
-            className="dl-arch-panel-img"
-            src={item.img}
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-            decoding="async"
-          />
-          <div className="dl-arch-panel-overlay" aria-hidden="true" />
-          <div className="dl-arch-panel-content">
-            <span className="dl-arch-panel-n">{item.n}</span>
-            <h3 className="dl-arch-panel-t">{item.title}</h3>
-            <p className="dl-arch-panel-d">{item.desc}</p>
-          </div>
-        </motion.article>
+        <ArchPanel key={item.n} item={item} i={i} />
       ))}
     </div>
   )
@@ -386,7 +413,13 @@ export default function DarkLuxe() {
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const update = () => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    })
+    window.__lenis = lenis
+    const updateParallax = () => {
       document.querySelectorAll('[data-parallax]').forEach(v => {
         const container = v.closest('section') ?? v.parentElement
         const rect = container.getBoundingClientRect()
@@ -394,16 +427,58 @@ export default function DarkLuxe() {
         v.style.transform = `translateY(${offset * 25}%)`
       })
     }
-    window.addEventListener('scroll', update, { passive: true })
-    window.addEventListener('resize', update, { passive: true })
-    update()
+    lenis.on('scroll', updateParallax)
+    let rafId
+    const raf = (t) => { lenis.raf(t); rafId = requestAnimationFrame(raf) }
+    rafId = requestAnimationFrame(raf)
+    updateParallax()
+    const onResize = () => updateParallax()
+    window.addEventListener('resize', onResize, { passive: true })
     return () => {
-      window.removeEventListener('scroll', update)
-      window.removeEventListener('resize', update)
+      cancelAnimationFrame(rafId)
+      lenis.destroy()
+      window.__lenis = null
+      window.removeEventListener('resize', onResize)
     }
   }, [])
 
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.dl-hero-text > *, .dl-hero-scroll').forEach(el => {
+        el.style.opacity = '1'
+        el.style.transform = 'none'
+      })
+      return
+    }
+    const heroH1     = document.querySelector('.dl-hero-h1')
+    const heroVideo  = document.querySelector('.dl-hero-video')
+    const heroLabel  = document.querySelector('.dl-hero-text .dl-label')
+    const heroBody   = document.querySelector('.dl-hero-body')
+    const heroBtn    = document.querySelector('.dl-hero-text .dl-btn')
+    const heroScroll = document.querySelector('.dl-hero-scroll')
+
+    const split = new SplitText(heroH1, { type: 'chars,words' })
+    gsap.set(heroH1, { opacity: 1 })
+    gsap.set(split.words, { overflow: 'hidden', display: 'inline-block' })
+    gsap.set(split.chars, { yPercent: 110, opacity: 0 })
+    gsap.set(heroVideo, { filter: 'brightness(0) saturate(0.62)' })
+    gsap.set([heroLabel, heroBody, heroBtn, heroScroll], { opacity: 0 })
+
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+    tl
+      .to(heroVideo,    { filter: 'brightness(0.38) saturate(0.62)', duration: 1.6, ease: 'power2.inOut' }, 0)
+      .to(heroLabel,    { opacity: 1, duration: 0.8 }, 0.6)
+      .to(split.chars,  { yPercent: 0, opacity: 1, duration: 1.0, stagger: { each: 0.028, ease: 'power2.out' } }, 0.9)
+      .to(heroBody,     { opacity: 1, duration: 0.9 }, 1.6)
+      .to(heroBtn,      { opacity: 1, duration: 0.7 }, 1.9)
+      .to(heroScroll,   { opacity: 1, duration: 0.9 }, 2.3)
+
+    return () => { tl.kill(); split.revert() }
+  }, [])
+
   return (
+    <>
+    <Cursor />
     <div className="dl">
 
       {/* ── Nav ───────────────────────────── */}
@@ -480,39 +555,25 @@ export default function DarkLuxe() {
         </video>
         <div className="dl-hero-video-overlay" />
         <div className="dl-hero-text">
-          <motion.p className="dl-label"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.3 }}>
-            AI Architect
-          </motion.p>
-          <motion.h1 className="dl-hero-h1"
-            initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.5, ease }}>
+          <p className="dl-label" style={{ opacity: 0 }}>AI Architect</p>
+          <h1 className="dl-hero-h1" style={{ opacity: 0 }}>
             Building AI<br />for work<br /><em>that moves.</em>
-          </motion.h1>
-          <motion.p className="dl-hero-body"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.9 }}>
+          </h1>
+          <p className="dl-hero-body" style={{ opacity: 0 }}>
             Full-stack developer working in AI automation, building production systems
             that actually do something. I'd love to bring that to Hunt St's three
             businesses, and I've sketched out what I'd build for each.
-          </motion.p>
-          <motion.a href="#studio" className="dl-btn"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.2 }}>
-            See what I'd build
-          </motion.a>
+          </p>
+          <MagneticWrap style={{ alignSelf: 'flex-start' }}>
+            <a href="#studio" className="dl-btn" style={{ opacity: 0 }}>
+              See what I'd build
+            </a>
+          </MagneticWrap>
         </div>
-        <motion.div
-          className="dl-hero-scroll"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.8 }}
-          aria-hidden="true"
-        >
+        <div className="dl-hero-scroll" style={{ opacity: 0 }} aria-hidden="true">
           <span className="dl-hero-scroll-line" />
           <span className="dl-hero-scroll-caret" />
-        </motion.div>
+        </div>
       </section>
 
       <div className="dl-rule" />
@@ -630,9 +691,11 @@ export default function DarkLuxe() {
             <a href="mailto:d.franco.ramos1@gmail.com" className="dl-cta-email">
               d.franco.ramos1@gmail.com
             </a>
-            <a href="mailto:d.franco.ramos1@gmail.com" className="dl-btn-filled">
-              Get in touch
-            </a>
+            <MagneticWrap>
+              <a href="mailto:d.franco.ramos1@gmail.com" className="dl-btn-filled">
+                Get in touch
+              </a>
+            </MagneticWrap>
             <p className="dl-built">
               Built in under 24 hours with Claude Code · brief and content mine, design fully delegated to the AI
             </p>
@@ -647,5 +710,6 @@ export default function DarkLuxe() {
       </footer>
 
     </div>
+    </>
   )
 }

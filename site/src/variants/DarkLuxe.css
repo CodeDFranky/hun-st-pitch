@@ -236,7 +236,7 @@
 .dl-hero-scroll {
   position: absolute;
   bottom: 2.5rem;
-  right: 5rem;
+  right: 3.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -832,6 +832,8 @@
   position: relative;
   overflow: hidden;
   cursor: default;
+  perspective: 800px;
+  will-change: transform;
 }
 .dl-arch-panel-img {
   position: absolute;
@@ -973,10 +975,10 @@
   content: '';
   position: absolute;
   left: 0;
-  top: 0;
+  top: 0.06em;
   bottom: 2rem;
   width: 1px;
-  background: linear-gradient(to bottom, var(--accent), transparent 85%);
+  background: var(--accent);
 }
 .dl-why-items {
   display: flex;
@@ -1179,28 +1181,22 @@
   0%, 12%  { --dl-sheen-pos: -30%; }
   62%, 100% { --dl-sheen-pos: 130%; }
 }
-.dl-hero-h1 {
-  position: relative;
-  overflow: clip;
-}
-.dl-hero-h1::after {
-  content: '';
-  position: absolute;
-  inset: -10% -30%;
-  background: linear-gradient(
-    100deg,
-    transparent 0%,
-    transparent calc(var(--dl-sheen-pos) - 16%),
-    rgba(255, 249, 238, 0.16) calc(var(--dl-sheen-pos) - 5%),
-    rgba(255, 249, 238, 0.28) var(--dl-sheen-pos),
-    rgba(255, 249, 238, 0.16) calc(var(--dl-sheen-pos) + 5%),
-    transparent calc(var(--dl-sheen-pos) + 16%),
-    transparent 100%
-  );
-  mix-blend-mode: screen;
-  pointer-events: none;
-  z-index: 1;
-  animation: dl-hero-sheen 10s ease-in-out 1.5s infinite;
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .dl-hero-h1 {
+    background: linear-gradient(
+      100deg,
+      #EDE7DE 0%,
+      #c0a97a calc(var(--dl-sheen-pos) - 22%),
+      #fff9ee var(--dl-sheen-pos),
+      #c0a97a calc(var(--dl-sheen-pos) + 22%),
+      #EDE7DE 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: dl-hero-sheen 10s ease-in-out 3.5s infinite;
+  }
+  .dl-hero-h1 em { color: inherit; }
 }
 
 /* ── OVERDRIVE: SCROLL-DRIVEN REVEALS ─────────────────── */
@@ -1292,12 +1288,66 @@
   .dl-footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
 }
 
+/* ── CURSOR ──────────────────────────────────────────── */
+@media (hover: hover) and (pointer: fine) {
+  .dl-cursor-dot {
+    position: fixed;
+    top: 0; left: 0;
+    width: 3px; height: 3px;
+    background: #C4A96B;
+    margin: -1.5px 0 0 -1.5px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    will-change: transform;
+  }
+
+  .dl-cursor-ring {
+    position: fixed;
+    top: 0; left: 0;
+    width: 26px; height: 26px;
+    margin: -13px 0 0 -13px;
+    border: 0.75px solid rgba(196, 169, 107, 0.48);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    will-change: transform;
+    transition:
+      width  0.55s cubic-bezier(0.16, 1, 0.3, 1),
+      height 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+      margin 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.4s ease,
+      border-width 0.4s ease;
+  }
+
+  /* ── Expand state: ring opens, brighter gold ── */
+  .dl-cursor-ring[data-state="expand"] {
+    width: 38px; height: 38px;
+    margin: -19px 0 0 -19px;
+    border-color: rgba(196, 169, 107, 0.85);
+    border-width: 1px;
+  }
+
+  /* ── Line state: ring flattens to a horizontal oval ── */
+  .dl-cursor-ring[data-state="line"] {
+    width: 42px; height: 13px;
+    margin: -6.5px 0 0 -21px;
+    border-color: rgba(196, 169, 107, 0.55);
+    border-width: 0.75px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
-  .dl-hero-h1::after { display: none !important; }
+  .dl-hero-h1 {
+    animation: none !important;
+    background: none !important;
+    color: var(--text) !important;
+  }
+  .dl-hero-h1 em { color: var(--accent) !important; }
   .dl-studio-vitrine-frame,
   .dl-tableone-vitrine-frame { animation: none !important; clip-path: none !important; }
   .dl-studio-marquee-track { animation: none !important; }
@@ -1318,6 +1368,7 @@
   .dl-nf-seg.is-active .dl-nf-seg-fill { animation: none !important; transform: scaleX(0.5); }
   .dl-tableone-row:hover { padding-left: 0 !important; }
   .dl-studio-ledger li:hover { padding-left: 0 !important; }
+  .dl-cursor-dot, .dl-cursor-ring { display: none !important; }
 }
 
 /* ── HAMBURGER BREAKPOINT ─────────────── */
