@@ -67,6 +67,17 @@ export default function DarkLuxe() {
 
       {/* ── Hero ──────────────────────────── */}
       <section className="dl-hero">
+        <video
+          className="dl-hero-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1400&auto=format&q=85"
+        >
+          <source src="https://videos.pexels.com/video-files/856894/856894-hd_1920_1080_25fps.mp4" type="video/mp4" />
+        </video>
+        <div className="dl-hero-video-overlay" />
         <div className="dl-hero-text">
           <motion.p className="dl-label"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }}
@@ -91,18 +102,6 @@ export default function DarkLuxe() {
             See what I'd build
           </motion.a>
         </div>
-        <motion.div
-          className="dl-hero-img"
-          initial={{ clipPath: 'inset(0 0 100% 0)' }}
-          animate={{ clipPath: 'inset(0 0 0% 0)' }}
-          transition={{ duration: 1.4, delay: 0.3, ease: [0.76, 0, 0.24, 1] }}
-        >
-          <img
-            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1400&auto=format&q=85"
-            alt="Atmospheric restaurant interior"
-          />
-          <div className="dl-hero-img-fade" />
-        </motion.div>
       </section>
 
       <div className="dl-rule" />
@@ -139,13 +138,7 @@ export default function DarkLuxe() {
 
       {/* ── Table One ─────────────────────── */}
       <FadeIn delay={0.05}>
-        <section id="tableone" className="dl-biz dl-biz--flip">
-          <div className="dl-biz-img">
-            <img
-              src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&auto=format&q=80"
-              alt="Strategic workspace"
-            />
-          </div>
+        <section id="tableone" className="dl-biz dl-biz--portrait">
           <div className="dl-biz-copy">
             <p className="dl-biz-num">02 — Table One</p>
             <h2 className="dl-biz-h2">Hospitality<br />Strategy &amp; Advisory</h2>
@@ -164,6 +157,12 @@ export default function DarkLuxe() {
               ))}
             </ul>
           </div>
+          <div className="dl-biz-img">
+            <img
+              src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&auto=format&q=80"
+              alt="Strategic workspace"
+            />
+          </div>
         </section>
       </FadeIn>
 
@@ -171,10 +170,10 @@ export default function DarkLuxe() {
       <FadeIn delay={0.05}>
         <section id="nofilter" className="dl-nf">
           <div className="dl-nf-bg">
-            <img
-              src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1400&auto=format&q=80"
-              alt="Content creation studio"
-            />
+            <video autoPlay muted loop playsInline
+              poster="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1400&auto=format&q=80">
+              <source src="https://videos.pexels.com/video-files/3571264/3571264-hd_1920_1080_25fps.mp4" type="video/mp4" />
+            </video>
           </div>
           <div className="dl-nf-inner">
             <div className="dl-nf-left">

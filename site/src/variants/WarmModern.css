@@ -161,6 +161,14 @@
   transition: transform 8s ease;
 }
 .wm-hero:hover .wm-hero-right img { transform: scale(1.04); }
+.wm-hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+.wm-hero:hover .wm-hero-video { /* scale handled by Framer Motion on wrapper */ }
 .wm-hero-right-overlay {
   position: absolute;
   inset: 0;
@@ -209,6 +217,9 @@
   grid-template-columns: 1fr 1fr;
   min-height: 55vh;
   border-bottom: 1px solid var(--border);
+}
+.wm-biz--wide {
+  grid-template-columns: 3fr 2fr;
 }
 .wm-biz--alt { background: var(--surface); }
 .wm-biz--alt .wm-biz-img-wrap { order: 1; }
@@ -359,6 +370,35 @@
   font-weight: 300;
   color: var(--muted);
   line-height: 1.65;
+}
+
+/* ── VIDEO STRIP ─────────────────────── */
+.wm-video-strip {
+  position: relative;
+  height: 40vh;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.wm-video-strip video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.55) saturate(0.7);
+}
+.wm-video-strip-copy {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wm-video-strip-copy span {
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  font-weight: 600;
+  color: rgba(250, 247, 242, 0.92);
+  letter-spacing: -0.02em;
+  text-align: center;
+  max-width: 32ch;
 }
 
 /* ── ARCHITECTURE ────────────────────── */
@@ -567,6 +607,9 @@
   .wm-hero-right { height: 55vw; min-height: 260px; }
   .wm-hero-left { padding: 3rem 1.5rem 4rem; }
   .wm-biz { grid-template-columns: 1fr; min-height: auto; }
+  .wm-biz--wide { grid-template-columns: 1fr; }
+  .wm-video-strip { height: 30vw; min-height: 180px; }
+  .wm-video-strip-copy span { font-size: 1rem; }
   .wm-biz--alt .wm-biz-img-wrap { order: -1; }
   .wm-biz-img-wrap { height: 55vw; min-height: 240px; }
   .wm-biz-copy { padding: 3rem 1.5rem; }
@@ -585,4 +628,10 @@
     transition-duration: 0.01ms !important;
   }
   .wm-marquee-track { animation-play-state: paused; }
+  .wm-hero-video,
+  .wm-video-strip video {
+    /* Videos continue to autoplay but we respect the user preference
+       by removing any CSS-driven motion effects on the elements */
+    filter: none;
+  }
 }

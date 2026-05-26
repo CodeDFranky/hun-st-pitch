@@ -60,39 +60,63 @@
 
 /* ── HERO ─────────────────────────────── */
 .ep-hero {
-  display: grid;
-  grid-template-columns: 62fr 38fr;
+  display: flex;
+  flex-direction: column;
   min-height: calc(100dvh - 61px);
   border-bottom: 1px solid var(--border);
 }
-.ep-hero-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 5rem 4rem 5rem 3.5rem;
-  border-right: 1px solid var(--border);
+.ep-hero-plate {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 50vh;
 }
-.ep-issue-tag {
+.ep-hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  filter: brightness(0.82) saturate(0.72);
+  display: block;
+}
+.ep-hero-plate-label {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 3.5rem;
+  right: 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.ep-hero-plate-label span {
   font-size: 0.65rem;
   font-weight: 400;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 2.5rem;
+  color: rgba(255, 255, 255, 0.75);
 }
+.ep-hero-editorial {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 4rem;
+  padding: 3.5rem 3.5rem 4rem;
+  border-top: 1px solid var(--border);
+}
+.ep-hero-editorial-left {}
 .ep-hero-h1 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(3.5rem, 6vw, 7rem);
+  font-size: clamp(2.8rem, 5vw, 5.5rem);
   font-weight: 400;
   line-height: 1.0;
   letter-spacing: -0.02em;
   color: var(--text);
-  margin-bottom: 2.5rem;
-  max-width: 14ch;
+  max-width: 18ch;
 }
-.ep-hero-h1 em {
-  font-style: italic;
-  color: var(--accent);
+.ep-hero-editorial-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 0.25rem;
 }
 .ep-hero-body {
   font-size: 1rem;
@@ -100,7 +124,20 @@
   line-height: 1.8;
   color: var(--muted);
   max-width: 44ch;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
+}
+.ep-issue-tag {
+  /* no longer used in new hero, but keep rule in case it's referenced elsewhere */
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 2.5rem;
+}
+.ep-hero-h1 em {
+  font-style: italic;
+  color: var(--accent);
 }
 .ep-link-cta {
   display: inline-flex;
@@ -116,20 +153,6 @@
   transition: gap 0.2s ease;
 }
 .ep-link-cta:hover { gap: 1rem; }
-
-.ep-hero-right {
-  position: relative;
-  overflow: hidden;
-}
-.ep-hero-right img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-  filter: brightness(0.85) saturate(0.75);
-  transition: transform 9s ease;
-}
-.ep-hero:hover .ep-hero-right img { transform: scale(1.04); }
 
 /* ── CHAPTER INTRO ────────────────────── */
 .ep-chapter {
@@ -241,6 +264,21 @@
   display: grid;
   grid-template-columns: 1fr 2fr;
   border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.ep-nf-video-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.08) saturate(0.3);
+  z-index: 0;
+}
+.ep-nf-sidebar,
+.ep-nf-main {
+  position: relative;
+  z-index: 1;
 }
 .ep-nf-sidebar {
   border-right: 1px solid var(--border);
@@ -523,9 +561,8 @@
 @media (max-width: 768px) {
   .ep-nav { padding: 1.25rem 1.5rem; }
   .ep-nav-issue { display: none; }
-  .ep-hero { grid-template-columns: 1fr; }
-  .ep-hero-right { height: 50vw; min-height: 240px; }
-  .ep-hero-left { padding: 3rem 1.5rem 4rem; }
+  .ep-hero-plate { min-height: 40vw; }
+  .ep-hero-editorial { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 1.5rem 3rem; }
   .ep-chapter { padding: 1.5rem; }
   .ep-biz { grid-template-columns: 1fr; }
   .ep-biz-sidebar { border-right: none; border-bottom: 1px solid var(--border); padding: 2rem 1.5rem; flex-direction: row; align-items: center; }

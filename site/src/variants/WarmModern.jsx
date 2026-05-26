@@ -140,10 +140,16 @@ export default function WarmModern() {
         </div>
         <motion.div className="wm-hero-right" style={{ scale: heroScale }}>
           <div className="wm-hero-right-overlay" />
-          <img
-            src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=900&auto=format&q=80"
-            alt="Modern hospitality interior"
-          />
+          <video
+            className="wm-hero-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=900&auto=format&q=80"
+          >
+            <source src="https://videos.pexels.com/video-files/4761286/4761286-hd_1920_1080_25fps.mp4" type="video/mp4" />
+          </video>
         </motion.div>
       </section>
 
@@ -169,7 +175,7 @@ export default function WarmModern() {
 
       {/* ── Studio ────────────────────────── */}
       <Reveal>
-        <section className="wm-biz">
+        <section className="wm-biz wm-biz--wide">
           <div className="wm-biz-img-wrap">
             <img
               src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1000&auto=format&q=80"
@@ -274,6 +280,17 @@ export default function WarmModern() {
           </div>
         </section>
       </Reveal>
+
+      {/* ── Video Strip ──────────────────── */}
+      <div className="wm-video-strip">
+        <video autoPlay muted loop playsInline
+          poster="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&auto=format&q=80">
+          <source src="https://videos.pexels.com/video-files/3843536/3843536-hd_1920_1080_30fps.mp4" type="video/mp4" />
+        </video>
+        <div className="wm-video-strip-copy">
+          <span>One AI layer. Three businesses. Full ownership.</span>
+        </div>
+      </div>
 
       {/* ── Architecture ──────────────────── */}
       <Reveal>

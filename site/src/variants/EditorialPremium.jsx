@@ -133,45 +133,56 @@ export default function EditorialPremium() {
 
       {/* ── Hero ──────────────────────────── */}
       <section className="ep-hero">
-        <div className="ep-hero-left">
-          <motion.p
-            className="ep-issue-tag"
+        <div className="ep-hero-plate">
+          <video
+            className="ep-hero-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1400&auto=format&q=80"
+          >
+            <source src="https://videos.pexels.com/video-files/7710210/7710210-hd_1920_1080_25fps.mp4" type="video/mp4" />
+          </video>
+          <motion.div
+            className="ep-hero-plate-label"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
           >
-            AI Architect for Hunt St
-          </motion.p>
-          <h1 className="ep-hero-h1">
-            <WordReveal delay={0.4}>The systems that compound</WordReveal>
-            <br />
-            <WordReveal delay={0.7}>while you sleep.</WordReveal>
-          </h1>
-          <motion.p
-            className="ep-hero-body"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.8 }}
-          >
-            I design and ship AI and automation systems for founder-led businesses.
-            I own the architecture, build the agents, teach the team, and keep
-            extending the stack as we learn what works together.
-          </motion.p>
-          <motion.a
-            href="#biz"
-            className="ep-link-cta"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.1 }}
-          >
-            Read on ›
-          </motion.a>
+            <span>AI Architect for Hunt St</span>
+            <span>Issue 01 / 2025</span>
+          </motion.div>
         </div>
-        <div className="ep-hero-right">
-          <img
-            src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&auto=format&q=80"
-            alt="Premium hospitality interior"
-          />
+        <div className="ep-hero-editorial">
+          <div className="ep-hero-editorial-left">
+            <h1 className="ep-hero-h1">
+              <WordReveal delay={0.5}>The systems that compound</WordReveal>
+              <br />
+              <WordReveal delay={0.8}>while you sleep.</WordReveal>
+            </h1>
+          </div>
+          <div className="ep-hero-editorial-right">
+            <motion.p
+              className="ep-hero-body"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 1.0 }}
+            >
+              I design and ship AI and automation systems for founder-led businesses.
+              I own the architecture, build the agents, teach the team, and keep
+              extending the stack as we learn what works together.
+            </motion.p>
+            <motion.a
+              href="#biz"
+              className="ep-link-cta"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.3 }}
+            >
+              Read on ›
+            </motion.a>
+          </div>
         </div>
       </section>
 
@@ -218,6 +229,10 @@ export default function EditorialPremium() {
       {/* ── No Filter ─────────────────────── */}
       <SlideIn>
         <section className="ep-nf">
+          <video className="ep-nf-video-bg" autoPlay muted loop playsInline
+            poster="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1400&auto=format&q=80">
+            <source src="https://videos.pexels.com/video-files/3571264/3571264-hd_1920_1080_25fps.mp4" type="video/mp4" />
+          </video>
           <div className="ep-nf-sidebar">
             <div className="ep-biz-num">03</div>
             <span className="ep-biz-tag">No Filter</span>
