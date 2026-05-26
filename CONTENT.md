@@ -6,7 +6,6 @@
 - **Subject:** Franco Ramos, applying for AI Architect role at Hunt St
 - **Audience:** David (founder, Hunt St) and his team — creative directors, hospitality operators, marketers
 - **Tone:** Confident, direct, founder-adjacent. Not salesy. No buzzwords. The kind of person who ships things.
-- **Variants:** Three design variants from the same content (dark-luxe, editorial-premium, warm-modern)
 
 ---
 

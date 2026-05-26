@@ -10,7 +10,7 @@ David (founder, Hunt St) and his team — creative directors, hospitality operat
 
 ## Product Purpose
 
-A personal pitch site that proves Franco Ramos's capability as an agentic developer and AI Architect. The site itself is the proof — built in under 24 hours using Claude Code, TasteSkill v2, and Impeccable, demonstrating what becomes possible when AI tooling is properly orchestrated. Three visual variants (Dark Luxe, Editorial Premium, Warm Modern) show range of aesthetic judgment. The goal is not to describe what Franco can do. It is to show it.
+A personal pitch site that proves Franco Ramos's capability as an agentic developer and AI Architect. The site itself is the proof — built in under 24 hours using Claude Code, TasteSkill v2, and Impeccable, demonstrating what becomes possible when AI tooling is properly orchestrated. The goal is not to describe what Franco can do. It is to show it.
 
 ## Brand Personality
 
@@ -29,7 +29,6 @@ Warm, assertive, and genuinely hopeful — not self-congratulatory. The tone is 
 2. **Assertive, not declarative.** Copy should invite, not announce. "Here's what I'd build" rather than "I'm the person you need." Hopeful and collaborative, not take-it-or-leave-it.
 3. **The wow factor is earned.** Ambition through art direction and technical craft — not gratuitous effects. Appropriate to a premium hospitality and design world.
 4. **Speed as signal.** Built in under 24 hours. Clean, decisive, nothing over-engineered or left unresolved.
-5. **Three variants, one person.** The aesthetic range should feel like three facets of the same judgment, not three unrelated experiments.
 
 ## Accessibility & Inclusion
 
