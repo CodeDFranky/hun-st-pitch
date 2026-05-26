@@ -110,10 +110,10 @@ export default function DarkLuxe() {
       <FadeIn id="studio" as="section">
         <section id="studio" className="dl-biz">
           <div className="dl-biz-img">
-            <img
-              src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&auto=format&q=80"
-              alt="Fine dining interior"
-            />
+            <video autoPlay muted loop playsInline
+              poster="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&auto=format&q=80">
+              <source src="https://videos.pexels.com/video-files/4109049/4109049-hd_1920_1080_30fps.mp4" type="video/mp4" />
+            </video>
           </div>
           <div className="dl-biz-copy">
             <p className="dl-biz-num">01 — Studio</p>
@@ -158,10 +158,10 @@ export default function DarkLuxe() {
             </ul>
           </div>
           <div className="dl-biz-img">
-            <img
-              src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&auto=format&q=80"
-              alt="Strategic workspace"
-            />
+            <video autoPlay muted loop playsInline
+              poster="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&auto=format&q=80">
+              <source src="https://videos.pexels.com/video-files/5264261/5264261-hd_1920_1080_25fps.mp4" type="video/mp4" />
+            </video>
           </div>
         </section>
       </FadeIn>
@@ -200,30 +200,37 @@ export default function DarkLuxe() {
       {/* ── Architecture ──────────────────── */}
       <FadeIn>
         <section className="dl-arch">
-          <h2 className="dl-arch-h2">
-            One AI layer.<br />
-            Three businesses.<br />
-            <em>Full ownership.</em>
-          </h2>
-          <p className="dl-arch-body">
-            I don't build isolated tools. I build a connected operating layer — shared memory,
-            consistent evaluation, common integrations — that compounds over time.
-          </p>
-          <div className="dl-arch-strip">
-            {ARCH_ITEMS.map((item, i) => (
-              <motion.div
-                key={item.n}
-                className="dl-arch-cell"
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-8% 0px' }}
-                transition={{ duration: 0.7, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-              >
-                <div className="dl-arch-n">{item.n}</div>
-                <div className="dl-arch-t">{item.title}</div>
-                <p className="dl-arch-d">{item.desc}</p>
-              </motion.div>
-            ))}
+          <video className="dl-arch-video" autoPlay muted loop playsInline
+            poster="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=1600&auto=format&q=80">
+            <source src="https://videos.pexels.com/video-files/2882090/2882090-hd_1920_1080_30fps.mp4" type="video/mp4" />
+          </video>
+          <div className="dl-arch-overlay" />
+          <div className="dl-arch-inner">
+            <h2 className="dl-arch-h2">
+              One AI layer.<br />
+              Three businesses.<br />
+              <em>Full ownership.</em>
+            </h2>
+            <p className="dl-arch-body">
+              I don't build isolated tools. I build a connected operating layer — shared memory,
+              consistent evaluation, common integrations — that compounds over time.
+            </p>
+            <div className="dl-arch-strip">
+              {ARCH_ITEMS.map((item, i) => (
+                <motion.div
+                  key={item.n}
+                  className="dl-arch-cell"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-8% 0px' }}
+                  transition={{ duration: 0.7, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                >
+                  <div className="dl-arch-n">{item.n}</div>
+                  <div className="dl-arch-t">{item.title}</div>
+                  <p className="dl-arch-d">{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
       </FadeIn>
@@ -264,20 +271,26 @@ export default function DarkLuxe() {
       {/* ── CTA ───────────────────────────── */}
       <FadeIn>
         <section id="contact" className="dl-cta">
-          <h2 className="dl-cta-h2">Ready to own<br />the AI layer?</h2>
-          <p className="dl-cta-body">
-            Available for a conversation, a working session, or a practical assessment — in whatever order makes sense for you.
-          </p>
-          <a href="mailto:d.franco.ramos1@gmail.com" className="dl-cta-email">
-            d.franco.ramos1@gmail.com
-          </a>
-          <br />
-          <a href="mailto:d.franco.ramos1@gmail.com" className="dl-btn-filled">
-            Get in touch
-          </a>
-          <p className="dl-built">
-            Built with Claude Code + TasteSkill v2 + Impeccable
-          </p>
+          <video className="dl-cta-video" autoPlay muted loop playsInline
+            poster="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1400&auto=format&q=80">
+            <source src="https://videos.pexels.com/video-files/856894/856894-hd_1920_1080_25fps.mp4" type="video/mp4" />
+          </video>
+          <div className="dl-cta-inner">
+            <h2 className="dl-cta-h2">Ready to own<br />the AI layer?</h2>
+            <p className="dl-cta-body">
+              Available for a conversation, a working session, or a practical assessment — in whatever order makes sense for you.
+            </p>
+            <a href="mailto:d.franco.ramos1@gmail.com" className="dl-cta-email">
+              d.franco.ramos1@gmail.com
+            </a>
+            <br />
+            <a href="mailto:d.franco.ramos1@gmail.com" className="dl-btn-filled">
+              Get in touch
+            </a>
+            <p className="dl-built">
+              Built with Claude Code + TasteSkill v2 + Impeccable
+            </p>
+          </div>
         </section>
       </FadeIn>
 

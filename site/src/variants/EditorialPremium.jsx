@@ -49,6 +49,7 @@ const BIZ_DATA = [
     title: <>Hospitality<br />&amp; Retail Design</>,
     sub: "All'Antico Vinaio, Racqueteer, Sea Salt Clovelly",
     img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&auto=format&q=80',
+    video: 'https://videos.pexels.com/video-files/3209840/3209840-hd_1920_1080_25fps.mp4',
     alt: 'Fine dining interior',
     systems: ['Project Workspace Generation', 'Cost Planning Agent', 'Builder Budget Revision Loop', 'Weekly Client Status Layer'],
   },
@@ -57,6 +58,7 @@ const BIZ_DATA = [
     title: <>Hospitality<br />Strategy &amp; Advisory</>,
     sub: 'Site sourcing, feasibility, lease, investor decks',
     img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&auto=format&q=80',
+    video: 'https://videos.pexels.com/video-files/5264261/5264261-hd_1920_1080_25fps.mp4',
     alt: 'Strategy workspace',
     systems: ['Feasibility Modelling Agent', 'Fee Proposal Generator', 'Pipeline Rhythm in Streak', 'Investor Deck Drafting Layer'],
   },
@@ -219,7 +221,9 @@ export default function EditorialPremium() {
                 </ul>
               </div>
               <div className="ep-biz-img">
-                <img src={biz.img} alt={biz.alt} />
+                <video autoPlay muted loop playsInline poster={biz.img}>
+                  <source src={biz.video} type="video/mp4" />
+                </video>
               </div>
             </div>
           </section>
@@ -256,30 +260,39 @@ export default function EditorialPremium() {
       {/* ── Architecture ──────────────────── */}
       <SlideIn>
         <section className="ep-arch" id="arch">
-          <div className="ep-arch-split">
-            <div className="ep-arch-lead">
-              <h2 className="ep-arch-h2">
-                One AI layer.<br />Three businesses.<br /><em>Full ownership.</em>
-              </h2>
-              <motion.div
-                className="ep-arch-first"
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0 }}
-              >
-                <span className="ep-arch-label">{ARCH_DATA[0].h}</span>
-                <p>{ARCH_DATA[0].p}</p>
-              </motion.div>
+          <video className="ep-arch-video" autoPlay muted loop playsInline
+            poster="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1400&auto=format&q=80">
+            <source src="https://videos.pexels.com/video-files/2882090/2882090-hd_1920_1080_30fps.mp4" type="video/mp4" />
+          </video>
+          <div className="ep-arch-inner">
+            <div className="ep-arch-split">
+              <div className="ep-arch-lead">
+                <h2 className="ep-arch-h2">
+                  One AI layer.<br />Three businesses.<br /><em>Full ownership.</em>
+                </h2>
+                <motion.div
+                  className="ep-arch-first"
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, delay: 0 }}
+                >
+                  <span className="ep-arch-label">{ARCH_DATA[0].h}</span>
+                  <p>{ARCH_DATA[0].p}</p>
+                </motion.div>
+              </div>
+              <div className="ep-arch-rest">
+                {ARCH_DATA.slice(1).map((item) => (
+                  <div key={item.h} className="ep-arch-entry">
+                    <h4>{item.h}</h4>
+                    <p>{item.p}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="ep-arch-rest">
-              {ARCH_DATA.slice(1).map((item) => (
-                <div key={item.h} className="ep-arch-entry">
-                  <h4>{item.h}</h4>
-                  <p>{item.p}</p>
-                </div>
-              ))}
-            </div>
+            <blockquote className="ep-arch-quote">
+              "Shared memory. Consistent evaluation. Common integrations. Built once, compounding forever."
+            </blockquote>
           </div>
         </section>
       </SlideIn>
@@ -324,9 +337,12 @@ export default function EditorialPremium() {
       {/* ── CTA ───────────────────────────── */}
       <SlideIn>
         <section id="contact" className="ep-cta">
-          <h2 className="ep-cta-h2">
-            Ready to own<br />the AI <em>layer?</em>
-          </h2>
+          <div className="ep-cta-left">
+            <span className="ep-cta-eyebrow">— End matter</span>
+            <h2 className="ep-cta-h2">
+              Ready to own<br />the AI <em>layer?</em>
+            </h2>
+          </div>
           <div className="ep-cta-right">
             <p className="ep-cta-body">
               Available for a conversation, a working session, or a practical assessment — in whatever order makes sense.

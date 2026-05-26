@@ -175,14 +175,16 @@
   position: relative;
   overflow: hidden;
 }
-.dl-biz-img img {
+.dl-biz-img img,
+.dl-biz-img video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   filter: brightness(0.65) saturate(0.7);
   transition: transform 0.7s ease;
 }
-.dl-biz:hover .dl-biz-img img { transform: scale(1.04); }
+.dl-biz:hover .dl-biz-img img,
+.dl-biz:hover .dl-biz-img video { transform: scale(1.04); }
 
 .dl-biz-copy {
   display: flex;
@@ -335,9 +337,30 @@
 
 /* ── ARCHITECTURE ────────────────────── */
 .dl-arch {
+  position: relative;
   background: var(--surface);
   padding: 8rem 5rem;
   text-align: center;
+  overflow: hidden;
+}
+.dl-arch-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.18) saturate(0.5);
+  z-index: 0;
+}
+.dl-arch-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(20, 18, 16, 0.4) 0%, rgba(12, 10, 8, 0.85) 80%);
+  z-index: 1;
+}
+.dl-arch-inner {
+  position: relative;
+  z-index: 2;
 }
 .dl-arch-h2 {
   font-family: 'Cormorant Garamond', serif;
@@ -467,10 +490,26 @@
 
 /* ── CTA ─────────────────────────────── */
 .dl-cta {
+  position: relative;
   background: var(--surface2);
   padding: 10rem 5rem;
   text-align: center;
   border-top: 1px solid var(--border);
+  overflow: hidden;
+}
+.dl-cta-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.12) saturate(0.4);
+  z-index: 0;
+  opacity: 0.5;
+}
+.dl-cta-inner {
+  position: relative;
+  z-index: 1;
 }
 .dl-cta-h2 {
   font-family: 'Cormorant Garamond', serif;

@@ -177,10 +177,10 @@ export default function WarmModern() {
       <Reveal>
         <section className="wm-biz wm-biz--wide">
           <div className="wm-biz-img-wrap">
-            <img
-              src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1000&auto=format&q=80"
-              alt="Fine dining interior"
-            />
+            <video autoPlay muted loop playsInline
+              poster="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1000&auto=format&q=80">
+              <source src="https://videos.pexels.com/video-files/4109049/4109049-hd_1920_1080_30fps.mp4" type="video/mp4" />
+            </video>
           </div>
           <div className="wm-biz-copy">
             <span className="wm-biz-tag">Studio</span>
@@ -212,10 +212,10 @@ export default function WarmModern() {
       <Reveal delay={0.05}>
         <section className="wm-biz wm-biz--alt">
           <div className="wm-biz-img-wrap">
-            <img
-              src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1000&auto=format&q=80"
-              alt="Strategic workspace"
-            />
+            <video autoPlay muted loop playsInline
+              poster="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1000&auto=format&q=80">
+              <source src="https://videos.pexels.com/video-files/6985285/6985285-hd_1920_1080_25fps.mp4" type="video/mp4" />
+            </video>
           </div>
           <div className="wm-biz-copy">
             <span className="wm-biz-tag">Table One</span>
@@ -295,7 +295,7 @@ export default function WarmModern() {
       {/* ── Architecture ──────────────────── */}
       <Reveal>
         <section className="wm-arch" id="arch">
-          <div className="wm-arch-left">
+          <div className="wm-arch-header">
             <h2>
               One AI layer across<br />
               three businesses.<br />
@@ -307,7 +307,7 @@ export default function WarmModern() {
               compounds over time and survives a two-week holiday.
             </p>
           </div>
-          <div className="wm-arch-right">
+          <div className="wm-arch-rail">
             {[
               { n: '01', h: 'Memory Architecture', p: "Compounds across businesses — what Studio learns informs Table One's models." },
               { n: '02', h: 'Evaluation Built In', p: 'Every agent has observability. You know when one fails before it matters.' },
@@ -316,17 +316,15 @@ export default function WarmModern() {
             ].map((item, i) => (
               <motion.div
                 key={item.n}
-                className="wm-arch-item"
+                className="wm-arch-step"
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
               >
-                <span className="wm-arch-n">{item.n}</span>
-                <div className="wm-arch-text">
-                  <h4>{item.h}</h4>
-                  <p>{item.p}</p>
-                </div>
+                <span className="wm-arch-step-n">{item.n}</span>
+                <h4>{item.h}</h4>
+                <p>{item.p}</p>
               </motion.div>
             ))}
           </div>
@@ -335,30 +333,36 @@ export default function WarmModern() {
 
       {/* ── Why ───────────────────────────── */}
       <section className="wm-why">
-        <Reveal>
-          <h2 className="wm-why-h2">
-            I think at architecture level.<br />
-            I ship at <em>"live by Friday."</em>
-          </h2>
-        </Reveal>
-        <div className="wm-why-list">
-          {WHY_ITEMS.map((item, i) => (
-            <motion.div
-              key={item.h}
-              className="wm-why-entry"
-              initial={{ opacity: 0, x: i % 2 === 0 ? -24 : 24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-5% 0px' }}
-              transition={{ duration: 0.7, delay: Math.floor(i / 2) * 0.12, ease: [0.25, 0.1, 0.25, 1] }}
-              whileHover={{ y: -3, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
-            >
-              <span className="wm-why-ghost-n" aria-hidden="true">0{i + 1}</span>
-              <div className="wm-why-entry-content">
-                <h3>{item.h}</h3>
-                <p>{item.p}</p>
-              </div>
-            </motion.div>
-          ))}
+        <video className="wm-why-video" autoPlay muted loop playsInline
+          poster="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=1400&auto=format&q=80">
+          <source src="https://videos.pexels.com/video-files/3843536/3843536-hd_1920_1080_30fps.mp4" type="video/mp4" />
+        </video>
+        <div className="wm-why-inner">
+          <Reveal>
+            <h2 className="wm-why-h2">
+              I think at architecture level.<br />
+              I ship at <em>"live by Friday."</em>
+            </h2>
+          </Reveal>
+          <div className="wm-why-list">
+            {WHY_ITEMS.map((item, i) => (
+              <motion.div
+                key={item.h}
+                className="wm-why-entry"
+                initial={{ opacity: 0, x: i % 2 === 0 ? -24 : 24 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: '-5% 0px' }}
+                transition={{ duration: 0.7, delay: Math.floor(i / 2) * 0.12, ease: [0.25, 0.1, 0.25, 1] }}
+                whileHover={{ y: -3, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
+              >
+                <span className="wm-why-ghost-n" aria-hidden="true">0{i + 1}</span>
+                <div className="wm-why-entry-content">
+                  <h3>{item.h}</h3>
+                  <p>{item.p}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
