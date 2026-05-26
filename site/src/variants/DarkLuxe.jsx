@@ -4,6 +4,19 @@ import './DarkLuxe.css'
 
 const ease = [0.165, 0.84, 0.44, 1]
 
+const archHdVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.13 } }
+}
+const archLineVariants = {
+  hidden: { opacity: 0, y: 18, x: -8 },
+  visible: { opacity: 1, y: 0, x: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } }
+}
+const archThreadVariants = {
+  hidden: { scaleY: 0 },
+  visible: { scaleY: 1, transition: { duration: 0.65, delay: 0.5, ease: [0.16, 1, 0.3, 1] } }
+}
+
 function FadeIn({ children, className, delay = 0, as = 'div' }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-8% 0px' })
@@ -22,10 +35,10 @@ function FadeIn({ children, className, delay = 0, as = 'div' }) {
 }
 
 const ARCH_ITEMS = [
-  { n: '01', title: 'Memory Architecture', desc: "Compounds across businesses, so what Studio learns can inform Table One's feasibility models." },
-  { n: '02', title: 'Evaluation Built In', desc: 'Every agent has observability, so you hear about a fail before it matters.' },
-  { n: '03', title: 'Cross-Business Learning', desc: "No Filter's performance data sharpens the brand voice layer over time." },
-  { n: '04', title: 'Documentation First', desc: 'Architecture that survives a two-week holiday and scales beyond one person.' },
+  { n: '01', title: 'Memory Architecture', desc: "Compounds across businesses, so what Studio learns can inform Table One's feasibility models.", img: '/images/arch-01.jpg' },
+  { n: '02', title: 'Evaluation Built In', desc: 'Every agent has observability, so you hear about a fail before it matters.', img: '/images/arch-02.jpg' },
+  { n: '03', title: 'Cross-Business Learning', desc: "No Filter's performance data sharpens the brand voice layer over time.", img: '/images/arch-03.jpg' },
+  { n: '04', title: 'Documentation First', desc: 'Architecture that survives a two-week holiday and scales beyond one person.', img: '/images/arch-04.jpg' },
 ]
 
 const WHY_ITEMS = [
@@ -36,10 +49,10 @@ const WHY_ITEMS = [
 ]
 
 const NF_SERVICES = [
-  { h: 'Brand Voice', p: 'Interviews to voice guide to enforcement layer across all content output.', long: "A repeatable pipeline that captures how a founder actually speaks, codifies it into a voice guide, and enforces it at every content surface. The brand stays consistent whether one person ships or ten do." },
-  { h: 'Content Pipeline', p: 'LinkedIn, Instagram, EDM, short-form, calibrated per client voice.', long: 'A multi-channel content engine where every output is calibrated against the voice layer first. Same idea, different shape per platform. Never the same post stretched four ways.' },
-  { h: 'Performance Reporting', p: 'Meta, Google, LinkedIn Ads pulled into client-ready narrative insights.', long: "Paid media data pulled, normalised, and translated into the story behind the numbers: what worked, what didn't, what to test next. Less dashboard, more decision support." },
-  { h: 'AI-Search & SEO', p: 'GEO/AEO. Keyword clustering, content briefs, schema markup.', long: 'Generative engine optimisation for the new search layer: clustering, structured briefs, schema markup. Built so the brand shows up when an LLM is the one answering the question.' },
+  { h: 'Brand Voice', p: 'Interviews to voice guide to enforcement layer across all content output.', long: "A repeatable pipeline that captures how a founder actually speaks, codifies it into a voice guide, and enforces it at every content surface. The brand stays consistent whether one person ships or ten do.", video: '/videos/nofilter-bg.mp4', poster: '/images/nofilter-poster.jpg' },
+  { h: 'Content Pipeline', p: 'LinkedIn, Instagram, EDM, short-form, calibrated per client voice.', long: 'A multi-channel content engine where every output is calibrated against the voice layer first. Same idea, different shape per platform. Never the same post stretched four ways.', video: '/videos/tableone-proposal.mp4', poster: '/images/tableone-proposal-poster.jpg' },
+  { h: 'Performance Reporting', p: 'Meta, Google, LinkedIn Ads pulled into client-ready narrative insights.', long: "Paid media data pulled, normalised, and translated into the story behind the numbers: what worked, what didn't, what to test next. Less dashboard, more decision support.", video: '/videos/tableone-pipeline.mp4', poster: '/images/tableone-pipeline-poster.jpg' },
+  { h: 'AI-Search & SEO', p: 'GEO/AEO. Keyword clustering, content briefs, schema markup.', long: 'Generative engine optimisation for the new search layer: clustering, structured briefs, schema markup. Built so the brand shows up when an LLM is the one answering the question.', video: '/videos/tableone-deck.mp4', poster: '/images/tableone-deck-poster.jpg' },
 ]
 
 const NF_CYCLE_MS = 5000
@@ -54,87 +67,65 @@ const STUDIO_SYSTEMS = [
 const STUDIO_CLIENTS = ["All'Antico Vinaio", 'Racqueteer', 'Sea Salt Clovelly', '+ Others']
 
 const TABLEONE_LEDGER = [
-  {
-    title: 'Feasibility Modelling Agent',
-    gloss: 'Site to model in days. Capex, opex, breakeven, sensitivity, ready to talk through.',
-    video: '/videos/tableone-feasibility.mp4',
-    poster: '/images/tableone-feasibility-poster.jpg',
-    place: 'Feasibility · Live Model',
-  },
-  {
-    title: 'Fee Proposal Generator',
-    gloss: 'Brief in, proposal out. Scope, fee structure, deliverable matrix, drafted in voice.',
-    video: '/videos/studio-build.mp4',
-    poster: '/images/studio-poster.jpg',
-    place: 'Proposal · In Draft',
-  },
-  {
-    title: 'Pipeline Rhythm in Streak',
-    gloss: 'Live deal flow with feasibility status, lease stage, and decision owners surfaced weekly.',
-    video: '/videos/nofilter-bg.mp4',
-    poster: '/images/nofilter-poster.jpg',
-    place: 'Pipeline · This Week',
-  },
-  {
-    title: 'Investor Deck Drafting Layer',
-    gloss: 'One investor pack from the same model. Updated the day the assumptions move.',
-    video: '/videos/hero-loop.mp4',
-    poster: '/images/hero-poster.jpg',
-    place: 'Deck · Investor Pack',
-  },
+  { title: 'Feasibility Modelling Agent', gloss: 'Site to model in days. Capex, opex, breakeven, sensitivity, ready to talk through.' },
+  { title: 'Fee Proposal Generator', gloss: 'Brief in, proposal out. Scope, fee structure, deliverable matrix, drafted in voice.' },
+  { title: 'Pipeline Rhythm in Streak', gloss: 'Live deal flow with feasibility status, lease stage, and decision owners surfaced weekly.' },
+  { title: 'Investor Deck Drafting Layer', gloss: 'One investor pack from the same model. Updated the day the assumptions move.' },
 ]
 
-function ArchStrip() {
+function ArchHeading() {
   const ref = useRef(null)
-  const rafRef = useRef(0)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    const handleMove = (e) => {
-      const rect = el.getBoundingClientRect()
-      const x = ((e.clientX - rect.left) / rect.width) * 100
-      const y = ((e.clientY - rect.top) / rect.height) * 100
-      cancelAnimationFrame(rafRef.current)
-      rafRef.current = requestAnimationFrame(() => {
-        el.style.setProperty('--mx', `${x}%`)
-        el.style.setProperty('--my', `${y}%`)
-      })
-    }
-    const handleEnter = () => el.classList.add('is-lit')
-    const handleLeave = () => {
-      el.classList.remove('is-lit')
-      cancelAnimationFrame(rafRef.current)
-    }
-
-    el.addEventListener('pointermove', handleMove)
-    el.addEventListener('pointerenter', handleEnter)
-    el.addEventListener('pointerleave', handleLeave)
-    return () => {
-      el.removeEventListener('pointermove', handleMove)
-      el.removeEventListener('pointerenter', handleEnter)
-      el.removeEventListener('pointerleave', handleLeave)
-      cancelAnimationFrame(rafRef.current)
-    }
-  }, [])
-
+  const inView = useInView(ref, { once: true, margin: '-12% 0px' })
   return (
-    <div ref={ref} className="dl-arch-strip">
-      <div className="dl-arch-spot" aria-hidden />
+    <div className="dl-arch-h2-wrap" ref={ref}>
+      <motion.span
+        className="dl-arch-thread"
+        aria-hidden="true"
+        variants={archThreadVariants}
+        initial="hidden"
+        animate={inView ? 'visible' : 'hidden'}
+      />
+      <motion.h2
+        className="dl-arch-h2"
+        variants={archHdVariants}
+        initial="hidden"
+        animate={inView ? 'visible' : 'hidden'}
+      >
+        <motion.span className="dl-arch-line" variants={archLineVariants}>One AI layer.</motion.span>
+        <motion.span className="dl-arch-line" variants={archLineVariants}>Three businesses.</motion.span>
+        <motion.span className="dl-arch-line" variants={archLineVariants}><em>Shared from day one.</em></motion.span>
+      </motion.h2>
+    </div>
+  )
+}
+
+function ArchGallery() {
+  return (
+    <div className="dl-arch-gallery">
       {ARCH_ITEMS.map((item, i) => (
-        <motion.div
+        <motion.article
           key={item.n}
-          className="dl-arch-cell"
-          initial={{ opacity: 0, y: 16 }}
+          className={`dl-arch-panel dl-arch-panel--${item.n}`}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-8% 0px' }}
-          transition={{ duration: 0.7, delay: i * 0.1, ease }}
+          transition={{ duration: 0.85, delay: i * 0.12, ease }}
         >
-          <div className="dl-arch-n">{item.n}</div>
-          <div className="dl-arch-t">{item.title}</div>
-          <p className="dl-arch-d">{item.desc}</p>
-        </motion.div>
+          <img
+            className="dl-arch-panel-img"
+            src={item.img}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="dl-arch-panel-overlay" aria-hidden="true" />
+          <div className="dl-arch-panel-content">
+            <span className="dl-arch-panel-n">{item.n}</span>
+            <h3 className="dl-arch-panel-t">{item.title}</h3>
+            <p className="dl-arch-panel-d">{item.desc}</p>
+          </div>
+        </motion.article>
       ))}
     </div>
   )
@@ -192,8 +183,63 @@ function WhyAccordion() {
 }
 
 function TableOneSection() {
+  return (
+    <section id="tableone" className="dl-tableone">
+      <div className="dl-tableone-inner">
+        <div className="dl-tableone-vitrine">
+          <div className="dl-tableone-vitrine-frame">
+            <video autoPlay muted loop playsInline data-parallax
+              poster="/images/tableone-feasibility-poster.jpg">
+              <source src="/videos/tableone-feasibility.mp4" type="video/mp4" />
+            </video>
+            <span className="dl-tableone-vitrine-tag">Table One · Strategy</span>
+          </div>
+        </div>
+        <div className="dl-tableone-copy">
+          <p className="dl-biz-num">02 · Table One</p>
+          <h2 className="dl-biz-h2">Hospitality<br />Strategy &amp; Advisory</h2>
+          <p className="dl-tableone-prose">
+            Site sourcing through investor decking. Feasibility, fees, pipeline, decks,
+            modelled and drafted so the founder only sees what needs his judgment.
+          </p>
+          <ul className="dl-tableone-ledger">
+            {TABLEONE_LEDGER.map((item, i) => (
+              <motion.li
+                key={item.title}
+                className="dl-tableone-row"
+                initial={{ opacity: 0, x: 12 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: '-5% 0px' }}
+                transition={{ duration: 0.6, delay: i * 0.08, ease }}
+              >
+                <span className="dl-tableone-rn">0{i + 1}</span>
+                <span className="dl-tableone-rcopy">
+                  <span className="dl-tableone-rt">{item.title}</span>
+                  <span className="dl-tableone-rg">{item.gloss}</span>
+                </span>
+              </motion.li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function NFSection() {
   const [active, setActive] = useState(0)
+  const [paused, setPaused] = useState(false)
   const videoRefs = useRef([])
+  const current = NF_SERVICES[active]
+  const pad = (n) => String(n + 1).padStart(2, '0')
+
+  useEffect(() => {
+    if (paused) return
+    const id = setTimeout(() => {
+      setActive((a) => (a + 1) % NF_SERVICES.length)
+    }, NF_CYCLE_MS)
+    return () => clearTimeout(id)
+  }, [active, paused])
 
   useEffect(() => {
     videoRefs.current.forEach((v, i) => {
@@ -207,16 +253,27 @@ function TableOneSection() {
     })
   }, [active])
 
-  const current = TABLEONE_LEDGER[active]
+  const handlePick = (i) => {
+    if (i === active) return
+    setActive(i)
+  }
 
   return (
-    <section id="tableone" className="dl-tableone">
-      <div className="dl-tableone-plate">
-        {TABLEONE_LEDGER.map((item, i) => (
+    <section
+      id="nofilter"
+      className="dl-nf"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+    >
+      <div className="dl-nf-bg">
+        {NF_SERVICES.map((item, i) => (
           <video
             key={item.video}
             ref={(el) => { videoRefs.current[i] = el }}
-            className={`dl-tableone-plate-video${i === active ? ' is-active' : ''}`}
+            className={`dl-nf-bg-video${i === active ? ' is-active' : ''}`}
+            data-parallax
             autoPlay={i === active}
             muted
             loop
@@ -227,146 +284,73 @@ function TableOneSection() {
             <source src={item.video} type="video/mp4" />
           </video>
         ))}
-        <div className="dl-tableone-plate-overlay" />
-        <div className="dl-tableone-plate-meta">
-          <span className="dl-tableone-eyebrow">02 · Table One</span>
-          <span className="dl-tableone-eyebrow-rule" aria-hidden />
+      </div>
+      <div className={`dl-nf-exhibit${paused ? ' is-paused' : ''}`}>
+        <div className="dl-nf-header">
+          <p className="dl-label">03 · No Filter</p>
+          <h2 className="dl-nf-h2">Psychology-Led<br />Marketing Studio</h2>
+          <p className="dl-nf-sub">Brand voice · Content · Performance · AI-Search</p>
+        </div>
+        <div className="dl-nf-stage">
           <AnimatePresence mode="wait">
-            <motion.span
+            <motion.div
               key={active}
-              className="dl-tableone-place"
-              initial={{ opacity: 0, y: 4 }}
+              className="dl-nf-feature"
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: 0.4, ease }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.55, ease }}
             >
-              {current.place}
-            </motion.span>
+              <div className="dl-nf-feature-num">
+                <span>{pad(active)}</span>
+                <span className="dl-nf-feature-sep" aria-hidden>/</span>
+                <span className="dl-nf-feature-total">{pad(NF_SERVICES.length - 1)}</span>
+              </div>
+              <h3 className="dl-nf-feature-h">{current.h}</h3>
+              <p className="dl-nf-feature-p">{current.long}</p>
+            </motion.div>
           </AnimatePresence>
         </div>
-      </div>
-      <div className="dl-tableone-body">
-        <div className="dl-tableone-header">
-          <h2 className="dl-biz-h2">Hospitality<br />Strategy &amp; Advisory</h2>
-          <p className="dl-tableone-prose">
-            Site sourcing through investor decking. Feasibility, fees, pipeline, decks,
-            modelled and drafted so the founder only sees what needs his judgment.
-          </p>
+        <div
+          className="dl-nf-ticker"
+          role="tablist"
+          aria-label="No Filter services"
+        >
+          {NF_SERVICES.map((item, i) => (
+            <button
+              type="button"
+              key={item.h}
+              role="tab"
+              aria-selected={active === i}
+              aria-label={`Show ${item.h}`}
+              className={[
+                'dl-nf-seg',
+                i === active ? 'is-active' : '',
+                i < active ? 'is-done' : '',
+              ].filter(Boolean).join(' ')}
+              onClick={() => handlePick(i)}
+            >
+              <span className="dl-nf-seg-fill" aria-hidden />
+              <span className="dl-nf-seg-label">{item.h}</span>
+            </button>
+          ))}
         </div>
-        <ol className="dl-tableone-ledger" role="tablist" aria-label="Table One systems">
-          {TABLEONE_LEDGER.map((item, i) => {
-            const isActive = i === active
-            return (
-              <motion.li
-                key={item.title}
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-5% 0px' }}
-                transition={{ duration: 0.6, delay: i * 0.08, ease }}
-              >
-                <button
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  className={`dl-tableone-row${isActive ? ' is-active' : ''}`}
-                  onClick={() => setActive(i)}
-                >
-                  <span className="dl-tableone-rn">0{i + 1}</span>
-                  <span className="dl-tableone-rt">{item.title}</span>
-                  <span className="dl-tableone-rg">{item.gloss}</span>
-                  <span className="dl-tableone-row-rule" aria-hidden />
-                </button>
-              </motion.li>
-            )
-          })}
-        </ol>
       </div>
     </section>
   )
 }
 
-function NFExhibit() {
-  const [active, setActive] = useState(0)
-  const [paused, setPaused] = useState(false)
-  const current = NF_SERVICES[active]
-  const pad = (n) => String(n + 1).padStart(2, '0')
-
-  useEffect(() => {
-    if (paused) return
-    const id = setTimeout(() => {
-      setActive((a) => (a + 1) % NF_SERVICES.length)
-    }, NF_CYCLE_MS)
-    return () => clearTimeout(id)
-  }, [active, paused])
-
-  const handlePick = (i) => {
-    if (i === active) return
-    setActive(i)
-  }
-
-  return (
-    <div
-      className={`dl-nf-exhibit${paused ? ' is-paused' : ''}`}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
-    >
-      <div className="dl-nf-header">
-        <p className="dl-label">03 · No Filter</p>
-        <h2 className="dl-nf-h2">Psychology-Led<br />Marketing Studio</h2>
-        <p className="dl-nf-sub">Brand voice · Content · Performance · AI-Search</p>
-      </div>
-      <div className="dl-nf-stage">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active}
-            className="dl-nf-feature"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.55, ease }}
-          >
-            <div className="dl-nf-feature-num">
-              <span>{pad(active)}</span>
-              <span className="dl-nf-feature-sep" aria-hidden>/</span>
-              <span className="dl-nf-feature-total">{pad(NF_SERVICES.length - 1)}</span>
-            </div>
-            <h3 className="dl-nf-feature-h">{current.h}</h3>
-            <p className="dl-nf-feature-p">{current.long}</p>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-      <div
-        className="dl-nf-ticker"
-        role="tablist"
-        aria-label="No Filter services"
-      >
-        {NF_SERVICES.map((item, i) => (
-          <button
-            type="button"
-            key={item.h}
-            role="tab"
-            aria-selected={active === i}
-            aria-label={`Show ${item.h}`}
-            className={[
-              'dl-nf-seg',
-              i === active ? 'is-active' : '',
-              i < active ? 'is-done' : '',
-            ].filter(Boolean).join(' ')}
-            onClick={() => handlePick(i)}
-          >
-            <span className="dl-nf-seg-fill" aria-hidden />
-            <span className="dl-nf-seg-label">{item.h}</span>
-          </button>
-        ))}
-      </div>
-    </div>
-  )
-}
+const NAV_LINKS = [
+  { href: '#studio', label: 'Studio' },
+  { href: '#tableone', label: 'Table One' },
+  { href: '#nofilter', label: 'No Filter' },
+  { href: '#contact', label: 'Contact' },
+]
 
 export default function DarkLuxe() {
   const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('')
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 60)
@@ -374,19 +358,112 @@ export default function DarkLuxe() {
     return () => window.removeEventListener('scroll', fn)
   }, [])
 
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') setMenuOpen(false) }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [])
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
+
+  useEffect(() => {
+    const ids = ['studio', 'tableone', 'nofilter', 'contact']
+    const observers = ids.map(id => {
+      const el = document.getElementById(id)
+      if (!el) return null
+      const o = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id) },
+        { rootMargin: '-35% 0px -55% 0px' }
+      )
+      o.observe(el)
+      return o
+    })
+    return () => observers.forEach(o => o?.disconnect())
+  }, [])
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const update = () => {
+      document.querySelectorAll('[data-parallax]').forEach(v => {
+        const container = v.closest('section') ?? v.parentElement
+        const rect = container.getBoundingClientRect()
+        const offset = (rect.top + rect.height / 2 - window.innerHeight / 2) / (window.innerHeight + rect.height)
+        v.style.transform = `translateY(${offset * 25}%)`
+      })
+    }
+    window.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update, { passive: true })
+    update()
+    return () => {
+      window.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+    }
+  }, [])
+
   return (
     <div className="dl">
 
       {/* ── Nav ───────────────────────────── */}
-      <nav className={`dl-nav${scrolled ? ' dl-nav--scrolled' : ''}`}>
+      <nav className={`dl-nav${(scrolled || menuOpen) ? ' dl-nav--scrolled' : ''}`}>
         <span className="dl-nav-brand">Franco Ramos</span>
         <ul className="dl-nav-links">
-          <li><a href="#studio">Studio</a></li>
-          <li><a href="#tableone">Table One</a></li>
-          <li><a href="#nofilter">No Filter</a></li>
-          <li><a href="#contact" className="dl-nav-cta">Contact</a></li>
+          {NAV_LINKS.map(({ href, label }) => (
+            <li key={href}>
+              <a
+                href={href}
+                className={[
+                  href === '#contact' ? 'dl-nav-cta' : '',
+                  '#' + activeSection === href ? 'dl-nav-link--active' : '',
+                ].filter(Boolean).join(' ') || undefined}
+              >{label}</a>
+            </li>
+          ))}
         </ul>
+        <button
+          className={`dl-nav-hamburger${menuOpen ? ' is-open' : ''}`}
+          onClick={() => setMenuOpen(o => !o)}
+          aria-expanded={menuOpen}
+          aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
+          aria-controls="dl-mobile-nav"
+        >
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+        </button>
       </nav>
+
+      {/* ── Mobile nav overlay ────────────── */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            id="dl-mobile-nav"
+            className="dl-nav-mobile"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+            role="navigation"
+            aria-label="Mobile navigation"
+          >
+            <span className="dl-nav-mobile-brand">Franco Ramos</span>
+            <ul>
+              {NAV_LINKS.map(({ href, label }, i) => (
+                <motion.li
+                  key={href}
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.08 + i * 0.07, ease }}
+                >
+                  <a href={href} onClick={() => setMenuOpen(false)}>{label}</a>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ── Hero ──────────────────────────── */}
       <section className="dl-hero">
@@ -397,6 +474,7 @@ export default function DarkLuxe() {
           loop
           playsInline
           poster="/images/hero-poster.jpg"
+          data-parallax
         >
           <source src="/videos/hero-loop.mp4" type="video/mp4" />
         </video>
@@ -425,6 +503,16 @@ export default function DarkLuxe() {
             See what I'd build
           </motion.a>
         </div>
+        <motion.div
+          className="dl-hero-scroll"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.8 }}
+          aria-hidden="true"
+        >
+          <span className="dl-hero-scroll-line" />
+          <span className="dl-hero-scroll-caret" />
+        </motion.div>
       </section>
 
       <div className="dl-rule" />
@@ -460,7 +548,7 @@ export default function DarkLuxe() {
             </div>
             <div className="dl-studio-vitrine">
               <div className="dl-studio-vitrine-frame">
-                <video autoPlay muted loop playsInline
+                <video autoPlay muted loop playsInline data-parallax
                   poster="/images/studio-poster.jpg">
                   <source src="/videos/studio-build.mp4" type="video/mp4" />
                 </video>
@@ -488,39 +576,28 @@ export default function DarkLuxe() {
 
       {/* ── No Filter ─────────────────────── */}
       <FadeIn delay={0.05}>
-        <section id="nofilter" className="dl-nf">
-          <div className="dl-nf-bg">
-            <video autoPlay muted loop playsInline
-              poster="/images/nofilter-poster.jpg">
-              <source src="/videos/nofilter-bg.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <NFExhibit />
-        </section>
+        <NFSection />
       </FadeIn>
 
       {/* ── Architecture ──────────────────── */}
-      <FadeIn>
-        <section className="dl-arch">
-          <video className="dl-arch-video" autoPlay muted loop playsInline
-            poster="/images/arch-poster.jpg">
-            <source src="/videos/arch-layer.mp4" type="video/mp4" />
-          </video>
-          <div className="dl-arch-overlay" />
-          <div className="dl-arch-inner">
-            <h2 className="dl-arch-h2">
-              One AI layer.<br />
-              Three businesses.<br />
-              <em>Shared from day one.</em>
-            </h2>
-            <p className="dl-arch-body">
+      <section className="dl-arch">
+        <div className="dl-arch-inner">
+          <div className="dl-arch-header">
+            <ArchHeading />
+            <motion.p
+              className="dl-arch-body"
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-12% 0px' }}
+              transition={{ duration: 0.85, delay: 0.3, ease }}
+            >
               Isolated tools don't compound. A connected operating layer does: shared memory,
               consistent evaluation, common integrations that get sharper with use.
-            </p>
-            <ArchStrip />
+            </motion.p>
           </div>
-        </section>
-      </FadeIn>
+          <ArchGallery />
+        </div>
+      </section>
 
       {/* ── Why ───────────────────────────── */}
       <FadeIn>
@@ -541,12 +618,12 @@ export default function DarkLuxe() {
       {/* ── CTA ───────────────────────────── */}
       <FadeIn>
         <section id="contact" className="dl-cta">
-          <video className="dl-cta-video" autoPlay muted loop playsInline
-            poster="/images/hero-poster.jpg">
-            <source src="/videos/hero-loop.mp4" type="video/mp4" />
+          <video className="dl-cta-video" autoPlay muted loop playsInline data-parallax
+            poster="/images/cta-poster.jpg">
+            <source src="/videos/cta.mp4" type="video/mp4" />
           </video>
           <div className="dl-cta-inner">
-            <h2 className="dl-cta-h2">Want to build<br />this together?</h2>
+            <h2 className="dl-cta-h2">Build the AI layer<br /><em>across all three.</em></h2>
             <p className="dl-cta-body">
               Happy to start with a conversation, a working session, or a practical assessment, in whatever order makes sense.
             </p>

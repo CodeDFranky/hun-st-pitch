@@ -16,3 +16,15 @@ Thumbs.db
 
 # Personal resume (local only)
 don_franco_ramos_resume.md
+
+# Raw source video folder
+my own stuff/
+
+# Root-level working screenshots
+shot-*.png
+fix-*.png
+v2-*.png
+screenshot-*.png
+
+# Test asset scratchpad
+site/public/images/test/
