@@ -176,16 +176,17 @@ function WhyAccordion() {
                 type="button"
                 className="dl-why-trigger"
                 onClick={() => setOpen(isOpen ? -1 : i)}
-                onFocus={() => setOpen(i)}
                 aria-expanded={isOpen}
+                aria-controls={`why-panel-${i}`}
               >
-                <h3>{item.title}</h3>
+                <span className="dl-why-trigger-label">{item.title}</span>
                 <span className="dl-why-mark" aria-hidden>{isOpen ? '−' : '+'}</span>
               </button>
               <AnimatePresence initial={false}>
                 {isOpen && (
                   <motion.div
                     key="body"
+                    id={`why-panel-${i}`}
                     className="dl-why-content"
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
@@ -211,7 +212,7 @@ function TableOneSection() {
       <div className="dl-tableone-inner">
         <div className="dl-tableone-vitrine">
           <div className="dl-tableone-vitrine-frame">
-            <video autoPlay muted loop playsInline data-parallax
+            <video autoPlay muted loop playsInline preload="metadata" data-parallax
               poster="/images/tableone-feasibility-poster.jpg">
               <source src="/videos/tableone-feasibility.mp4" type="video/mp4" />
             </video>
@@ -639,7 +640,7 @@ export default function DarkLuxe() {
             </div>
             <div className="dl-studio-vitrine">
               <div className="dl-studio-vitrine-frame">
-                <video autoPlay muted loop playsInline data-parallax
+                <video autoPlay muted loop playsInline preload="metadata" data-parallax
                   poster="/images/studio-poster.jpg">
                   <source src="/videos/studio-build.mp4" type="video/mp4" />
                 </video>
