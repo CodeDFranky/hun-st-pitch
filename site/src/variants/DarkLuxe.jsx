@@ -176,7 +176,6 @@ function WhyAccordion() {
                 type="button"
                 className="dl-why-trigger"
                 onClick={() => setOpen(isOpen ? -1 : i)}
-                onMouseEnter={() => setOpen(i)}
                 onFocus={() => setOpen(i)}
                 aria-expanded={isOpen}
               >
@@ -383,6 +382,8 @@ export default function DarkLuxe() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
+  const hamburgerRef = useRef(null)
+  const drawerRef = useRef(null)
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 60)
@@ -399,6 +400,16 @@ export default function DarkLuxe() {
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
+
+  useEffect(() => {
+    if (menuOpen) {
+      requestAnimationFrame(() => {
+        drawerRef.current?.querySelector('a')?.focus()
+      })
+    } else {
+      hamburgerRef.current?.focus()
+    }
   }, [menuOpen])
 
   useEffect(() => {
@@ -500,6 +511,7 @@ export default function DarkLuxe() {
           ))}
         </ul>
         <button
+          ref={hamburgerRef}
           className={`dl-nav-hamburger${menuOpen ? ' is-open' : ''}`}
           onClick={() => setMenuOpen(o => !o)}
           aria-expanded={menuOpen}
@@ -512,16 +524,32 @@ export default function DarkLuxe() {
         </button>
       </nav>
 
-      {/* ── Mobile nav overlay ────────────── */}
+      {/* ── Mobile nav drawer ────────────── */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            id="dl-mobile-nav"
-            className="dl-nav-mobile"
+            key="backdrop"
+            className="dl-nav-backdrop"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+            transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+            onClick={() => setMenuOpen(false)}
+            aria-hidden="true"
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            key="drawer"
+            id="dl-mobile-nav"
+            className="dl-nav-mobile"
+            ref={drawerRef}
+            initial={{ x: 320 }}
+            animate={{ x: 0 }}
+            exit={{ x: 320 }}
+            transition={{ duration: 0.3, ease: [0.165, 0.84, 0.44, 1] }}
             role="navigation"
             aria-label="Mobile navigation"
           >
@@ -530,9 +558,9 @@ export default function DarkLuxe() {
               {NAV_LINKS.map(({ href, label }, i) => (
                 <motion.li
                   key={href}
-                  initial={{ opacity: 0, x: -16 }}
+                  initial={{ opacity: 0, x: 10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4, delay: 0.08 + i * 0.07, ease }}
+                  transition={{ duration: 0.28, delay: 0.08 + i * 0.05, ease }}
                 >
                   <a href={href} onClick={() => setMenuOpen(false)}>{label}</a>
                 </motion.li>

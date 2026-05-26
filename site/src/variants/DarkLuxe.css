@@ -16,6 +16,7 @@
   --accent-muted:  rgba(196, 169, 107, 0.5);   /* accent numerals at rest */
   --accent-wash:   rgba(196, 169, 107, 0.08);  /* vitrine frame tint */
   --text-faint:    rgba(237, 231, 222, 0.82);  /* arch panel descriptions */
+  --bg-scrim:      rgba(12, 10, 8, 0.6);       /* mobile drawer backdrop */
 
   background-color: var(--bg);
   color: var(--text);
@@ -101,17 +102,30 @@
 .dl-nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
 .dl-nav-hamburger.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-/* ── NAV: MOBILE OVERLAY ─────────────── */
-.dl-nav-mobile {
+/* ── NAV: MOBILE BACKDROP ─────────── */
+.dl-nav-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(12, 10, 8, 0.97);
-  backdrop-filter: blur(20px);
+  background: var(--bg-scrim);
+  z-index: 98;
+  cursor: default;
+}
+
+/* ── NAV: MOBILE DRAWER ─────────────── */
+.dl-nav-mobile {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(300px, 88vw);
+  background: var(--surface);
+  border-left: 1px solid var(--accent-border);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 5rem 2.5rem 3rem;
+  padding: 2rem 2rem 2.5rem;
   z-index: 99;
+  overflow-y: auto;
 }
 .dl-nav-mobile-brand {
   font-family: 'DM Sans', sans-serif;
@@ -120,7 +134,7 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
 }
 .dl-nav-mobile ul {
   list-style: none;
@@ -133,17 +147,17 @@
 .dl-nav-mobile a {
   display: block;
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.6rem, 8vw, 3.5rem);
+  font-size: clamp(2rem, 7vw, 2.8rem);
   font-weight: 300;
   font-style: italic;
   color: var(--text);
-  padding: 0.85rem 0;
+  padding: 0.9rem 0;
   transition: color 0.2s, padding-left 0.38s cubic-bezier(0.4, 0, 0.2, 1);
   letter-spacing: -0.01em;
   line-height: 1.1;
 }
 .dl-nav-mobile li:last-child a { color: var(--accent); }
-.dl-nav-mobile a:hover { color: var(--accent); padding-left: 0.6rem; }
+.dl-nav-mobile a:hover { color: var(--accent); padding-left: 0.5rem; }
 .dl-nav-mobile li:last-child a:hover { color: var(--text-bright); }
 
 /* ── HERO ─────────────────────────────── */
@@ -1306,7 +1320,7 @@
 
   .dl-arch { padding: 5rem 1.5rem; }
   .dl-arch-header { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 3rem; }
-  .dl-arch-gallery { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(4, 18rem); }
+  .dl-arch-gallery { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(2, 18rem); }
   .dl-arch-panel--01, .dl-arch-panel--02,
   .dl-arch-panel--03, .dl-arch-panel--04 { grid-column: auto; grid-row: auto; }
   .dl-arch-panel-d { opacity: 1; transform: translateY(0); }
