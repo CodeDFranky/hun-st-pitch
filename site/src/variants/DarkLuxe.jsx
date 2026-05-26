@@ -1,14 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useInView } from 'framer-motion'
 import gsap from 'gsap'
-import { SplitText } from 'gsap/SplitText'
 import Lenis from 'lenis'
 import Cursor from '../components/Cursor'
 import { useTilt } from '../components/useTilt'
 import { useMagnetic } from '../components/useMagnetic'
 import './DarkLuxe.css'
-
-gsap.registerPlugin(SplitText)
 
 const ease = [0.165, 0.84, 0.44, 1]
 
@@ -465,23 +462,20 @@ export default function DarkLuxe() {
     const heroBtn    = document.querySelector('.dl-hero-text .dl-btn')
     const heroScroll = document.querySelector('.dl-hero-scroll')
 
-    const split = new SplitText(heroH1, { type: 'chars,words' })
-    gsap.set(heroH1, { opacity: 1 })
-    gsap.set(split.words, { overflow: 'hidden', display: 'inline-block' })
-    gsap.set(split.chars, { yPercent: 110, opacity: 0 })
+    gsap.set(heroH1, { y: 32 })
     gsap.set(heroVideo, { filter: 'brightness(0) saturate(0.62)' })
     gsap.set([heroLabel, heroBody, heroBtn, heroScroll], { opacity: 0 })
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
     tl
-      .to(heroVideo,    { filter: 'brightness(0.38) saturate(0.62)', duration: 1.6, ease: 'power2.inOut' }, 0)
-      .to(heroLabel,    { opacity: 1, duration: 0.8 }, 0.6)
-      .to(split.chars,  { yPercent: 0, opacity: 1, duration: 1.0, stagger: { each: 0.028, ease: 'power2.out' } }, 0.9)
-      .to(heroBody,     { opacity: 1, duration: 0.9 }, 1.6)
-      .to(heroBtn,      { opacity: 1, duration: 0.7 }, 1.9)
-      .to(heroScroll,   { opacity: 1, duration: 0.9 }, 2.3)
+      .to(heroVideo,  { filter: 'brightness(0.38) saturate(0.62)', duration: 1.6, ease: 'power2.inOut' }, 0)
+      .to(heroLabel,  { opacity: 1, duration: 0.8 }, 0.6)
+      .to(heroH1,     { opacity: 1, y: 0, duration: 1.1 }, 0.85)
+      .to(heroBody,   { opacity: 1, duration: 0.9 }, 1.65)
+      .to(heroBtn,    { opacity: 1, duration: 0.7 }, 1.95)
+      .to(heroScroll, { opacity: 1, duration: 0.9 }, 2.35)
 
-    return () => { tl.kill(); split.revert() }
+    return () => { tl.kill() }
   }, [])
 
   return (
