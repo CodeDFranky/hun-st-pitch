@@ -374,6 +374,16 @@ export default function DarkLuxe() {
   const [activeSection, setActiveSection] = useState('')
   const hamburgerRef = useRef(null)
   const drawerRef = useRef(null)
+  const menuLockRef = useRef(false)
+
+  // Debounced toggle prevents ghost clicks (mobile 300ms synthetic click
+  // double-fires and re-opens the drawer immediately after it closes)
+  const toggleMenu = () => {
+    if (menuLockRef.current) return
+    menuLockRef.current = true
+    setMenuOpen(o => !o)
+    setTimeout(() => { menuLockRef.current = false }, 500)
+  }
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 60)
@@ -387,9 +397,23 @@ export default function DarkLuxe() {
     return () => document.removeEventListener('keydown', onKey)
   }, [])
 
+  // Pause scroll while drawer is open. overscroll-behavior:none stops iOS
+  // momentum scroll-through without touching layout (no position:fixed needed).
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden'
+      document.body.style.overscrollBehavior = 'none'
+      window.__lenis?.stop()
+    } else {
+      document.body.style.overflow = ''
+      document.body.style.overscrollBehavior = ''
+      window.__lenis?.start()
+    }
+    return () => {
+      document.body.style.overflow = ''
+      document.body.style.overscrollBehavior = ''
+      window.__lenis?.start()
+    }
   }, [menuOpen])
 
   useEffect(() => {
@@ -397,9 +421,9 @@ export default function DarkLuxe() {
       requestAnimationFrame(() => {
         drawerRef.current?.querySelector('a')?.focus()
       })
-    } else {
-      hamburgerRef.current?.focus()
     }
+    // Don't focus hamburger on close — WebKit fires a phantom click on
+    // focused buttons which immediately re-opens the drawer
   }, [menuOpen])
 
   useEffect(() => {
@@ -503,7 +527,7 @@ export default function DarkLuxe() {
         <button
           ref={hamburgerRef}
           className={`dl-nav-hamburger${menuOpen ? ' is-open' : ''}`}
-          onClick={() => setMenuOpen(o => !o)}
+          onClick={toggleMenu}
           aria-expanded={menuOpen}
           aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
           aria-controls="dl-mobile-nav"
