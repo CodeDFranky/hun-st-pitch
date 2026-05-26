@@ -17,6 +17,8 @@ export default function Cursor() {
     const ring = ringRef.current
     if (!dot || !ring) return
 
+    document.body.classList.add('dl-cursor-active')
+
     const onMove = (e) => {
       pos.current = { x: e.clientX, y: e.clientY }
       dot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
@@ -55,6 +57,7 @@ export default function Cursor() {
       cancelAnimationFrame(rafRef.current)
       document.removeEventListener('mousemove', onMove)
       document.removeEventListener('mouseover', onOver)
+      document.body.classList.remove('dl-cursor-active')
     }
   }, [])
 

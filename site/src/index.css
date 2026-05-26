@@ -37,5 +37,5 @@ button {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  * { cursor: none !important; }
+  body.dl-cursor-active * { cursor: none !important; }
 }
