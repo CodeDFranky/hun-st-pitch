@@ -1,0 +1,26 @@
+[  0.00 ->   3.50] Did Claude Code and Google adjust your website designers?
+[  3.50 ->   5.50] Everyone is building websites with Claude Code,
+[  5.50 ->   8.10] but most of the designs look like AI slop.
+[  8.10 ->  10.70] But here's how you can connect Google Stitch to Claude Code
+[ 10.70 ->  13.60] to make $10,000 professional websites for free.
+[ 13.60 ->  15.50] So step one, go to this GitHub library
+[ 15.50 ->  18.50] and install the Google Stitch skill with this one command.
+[ 18.50 ->  21.40] Step two, don't describe your website to Claude just yet.
+[ 21.40 ->  24.10] First, install this skill which turns any Claude prompt
+[ 24.10 ->  26.30] into an enhanced prompt specifically made
+[ 26.30 ->  28.30] for Google Stitch's design system.
+[ 28.30 ->  30.90] Step three, enter this prompt and Claude will work
+[ 30.90 ->  35.50] with Google Stitch to create the design.md and site.md files.
+[ 35.50 ->  38.10] This way you have a professional design system
+[ 38.10 ->  40.20] of consistent colors and fonts.
+[ 40.20 ->  43.60] Step four, ask Claude Code to run the Stitch Loop skill
+[ 43.60 ->  46.40] and it will build out all your pages automatically.
+[ 46.40 ->  49.40] Step five, install the React Component skill
+[ 49.40 ->  51.00] with this one command
+[ 51.00 ->  53.00] and then ask Claude to turn your code
+[ 53.00 ->  54.90] into a production ready website
+[ 54.90 ->  57.40] that you can launch with React Components.
+[ 57.40 ->  59.80] So now you have a professionally designed website
+[ 59.80 ->  61.00] completely for free.
+[ 61.00 ->  62.30] Comment website below
+[ 62.30 ->  64.50] and I'll send you the step-by-step guide.

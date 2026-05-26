@@ -1,0 +1,52 @@
+.variant-switcher {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.35rem;
+  border-radius: 2rem;
+  backdrop-filter: blur(16px);
+}
+
+.variant-switcher--dark {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.variant-switcher--light {
+  background: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.variant-btn {
+  padding: 0.4rem 1.1rem;
+  border-radius: 1.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  font-family: system-ui, sans-serif;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.variant-switcher--dark .variant-btn {
+  color: rgba(255, 255, 255, 0.5);
+  background: transparent;
+}
+
+.variant-switcher--dark .variant-btn--active {
+  background: rgba(255, 255, 255, 0.9);
+  color: #1a1a1a;
+}
+
+.variant-switcher--light .variant-btn {
+  color: rgba(0, 0, 0, 0.45);
+  background: transparent;
+}
+
+.variant-switcher--light .variant-btn--active {
+  background: rgba(0, 0, 0, 0.82);
+  color: #fff;
+}

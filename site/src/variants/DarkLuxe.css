@@ -1,0 +1,495 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
+
+.dl {
+  --bg:       #0C0A08;
+  --surface:  #141210;
+  --surface2: #1B1714;
+  --text:     #EDE7DE;
+  --muted:    #7A7268;
+  --accent:   #C4A96B;
+  --border:   rgba(196, 169, 107, 0.1);
+
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ── NAV ─────────────────────────────── */
+.dl-nav {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.75rem 3.5rem;
+  transition: background 0.5s ease, border-color 0.5s ease;
+  border-bottom: 1px solid transparent;
+}
+.dl-nav--scrolled {
+  background: rgba(12, 10, 8, 0.9);
+  backdrop-filter: blur(14px);
+  border-color: var(--border);
+}
+.dl-nav-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.dl-nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+.dl-nav-links a {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.dl-nav-links a:hover { color: var(--text); }
+.dl-nav-cta {
+  color: var(--accent) !important;
+  border: 1px solid rgba(196, 169, 107, 0.3);
+  padding: 0.4rem 1.1rem;
+  transition: background 0.25s ease, color 0.25s ease !important;
+}
+.dl-nav-cta:hover {
+  background: var(--accent) !important;
+  color: var(--bg) !important;
+}
+
+/* ── HERO ─────────────────────────────── */
+.dl-hero {
+  display: grid;
+  grid-template-columns: 45fr 55fr;
+  min-height: 100dvh;
+}
+.dl-hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 9rem 4rem 6rem 5rem;
+}
+.dl-label {
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 2rem;
+}
+.dl-hero-h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.5rem, 5.5vw, 6rem);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: 2.25rem;
+}
+.dl-hero-h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.dl-hero-body {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 42ch;
+  margin-bottom: 3rem;
+}
+.dl-btn {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(196, 169, 107, 0.35);
+  padding: 1rem 2.25rem;
+  position: relative;
+  overflow: hidden;
+  align-self: flex-start;
+  transition: color 0.3s ease;
+}
+.dl-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: translateX(-101%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+.dl-btn:hover { color: var(--bg); }
+.dl-btn:hover::before { transform: translateX(0); }
+
+.dl-hero-img {
+  position: relative;
+  overflow: hidden;
+}
+.dl-hero-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.72) saturate(0.75);
+  transition: transform 9s ease;
+}
+.dl-hero:hover .dl-hero-img img { transform: scale(1.04); }
+.dl-hero-img-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--bg) 0%, transparent 28%);
+  pointer-events: none;
+}
+
+/* ── HAIRLINE ─────────────────────────── */
+.dl-rule { height: 1px; background: var(--border); margin: 0 3.5rem; }
+
+/* ── BUSINESS BANDS ──────────────────── */
+.dl-biz {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 56vh;
+  border-bottom: 1px solid var(--border);
+}
+.dl-biz--flip { direction: rtl; }
+.dl-biz--flip > * { direction: ltr; }
+
+.dl-biz-img {
+  position: relative;
+  overflow: hidden;
+}
+.dl-biz-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.65) saturate(0.7);
+  transition: transform 0.7s ease;
+}
+.dl-biz:hover .dl-biz-img img { transform: scale(1.04); }
+
+.dl-biz-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4.5rem 5rem;
+}
+.dl-biz-num {
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+.dl-biz-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+.dl-biz-sub {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+}
+.dl-systems {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.dl-systems li {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: var(--text);
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.dl-systems li:last-child { border-bottom: none; }
+.dl-systems li::before {
+  content: '—';
+  color: var(--accent);
+  flex-shrink: 0;
+  font-size: 0.7rem;
+}
+
+/* ── NO FILTER (overlay) ─────────────── */
+.dl-nf {
+  position: relative;
+  min-height: 68vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem 5rem;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.dl-nf-bg {
+  position: absolute;
+  inset: 0;
+}
+.dl-nf-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.3) saturate(0.45);
+}
+.dl-nf-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(12,10,8,0.96) 38%, rgba(12,10,8,0.55));
+}
+.dl-nf-inner { position: relative; z-index: 1; }
+.dl-nf-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 4vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+.dl-nf-sub {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 3.5rem;
+}
+.dl-nf-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  max-width: 880px;
+}
+.dl-nf-item h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.dl-nf-item p {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* ── ARCHITECTURE ────────────────────── */
+.dl-arch {
+  background: var(--surface);
+  padding: 8rem 5rem;
+  text-align: center;
+}
+.dl-arch-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 5vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+.dl-arch-h2 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.dl-arch-body {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--muted);
+  max-width: 52ch;
+  margin: 0 auto 5rem;
+  line-height: 1.8;
+}
+.dl-arch-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+}
+.dl-arch-cell {
+  padding: 2.5rem 2rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.dl-arch-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 1.25rem;
+  font-variant-numeric: tabular-nums;
+}
+.dl-arch-t {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.dl-arch-d {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* ── WHY ─────────────────────────────── */
+.dl-why { padding: 8rem 5rem; }
+.dl-why-hd { margin-bottom: 5rem; }
+.dl-why-over {
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+.dl-why-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--text);
+  max-width: 18ch;
+}
+.dl-why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+}
+.dl-why-item {
+  background: var(--bg);
+  padding: 3rem;
+}
+.dl-why-item h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+.dl-why-item p {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 38ch;
+}
+
+/* ── CTA ─────────────────────────────── */
+.dl-cta {
+  background: var(--surface2);
+  padding: 10rem 5rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+.dl-cta-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--text);
+  margin-bottom: 2rem;
+}
+.dl-cta-email {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 3rem;
+  transition: color 0.2s;
+}
+.dl-cta-email:hover { color: var(--accent); }
+.dl-btn-filled {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 1.1rem 3rem;
+  transition: opacity 0.2s;
+  margin-bottom: 5rem;
+}
+.dl-btn-filled:hover { opacity: 0.82; }
+.dl-built {
+  font-size: 0.68rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: rgba(122, 114, 104, 0.5);
+  text-transform: uppercase;
+}
+
+/* ── FOOTER ──────────────────────────── */
+.dl-footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dl-footer p {
+  font-size: 0.68rem;
+  font-weight: 300;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── RESPONSIVE ──────────────────────── */
+@media (max-width: 900px) {
+  .dl-nav { padding: 1.25rem 1.5rem; }
+  .dl-nav-links { gap: 1.25rem; }
+  .dl-hero { grid-template-columns: 1fr; }
+  .dl-hero-img { height: 55vw; min-height: 260px; order: -1; }
+  .dl-hero-text { padding: 3rem 1.5rem 4rem; }
+  .dl-rule { margin: 0 1.5rem; }
+  .dl-biz { grid-template-columns: 1fr; min-height: auto; }
+  .dl-biz--flip { direction: ltr; }
+  .dl-biz-img { height: 52vw; min-height: 220px; }
+  .dl-biz-copy { padding: 3rem 1.5rem; }
+  .dl-nf { padding: 4rem 1.5rem; }
+  .dl-nf-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .dl-arch { padding: 5rem 1.5rem; }
+  .dl-arch-strip { grid-template-columns: 1fr 1fr; }
+  .dl-why { padding: 5rem 1.5rem; }
+  .dl-why-grid { grid-template-columns: 1fr; }
+  .dl-cta { padding: 6rem 1.5rem; }
+  .dl-footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
