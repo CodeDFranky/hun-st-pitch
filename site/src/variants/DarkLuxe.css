@@ -1434,7 +1434,8 @@
     padding-right: calc(50% - 660px);
   }
   .dl-hero-text {
-    padding-left: calc(50% - 660px);
+    margin-left: calc(50% - 660px);
+    padding-left: 0;
   }
   .dl-rule {
     margin-left: auto;
