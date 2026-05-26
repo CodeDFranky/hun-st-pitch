@@ -5,3 +5,14 @@ dist/
 .env
 .DS_Store
 Thumbs.db
+
+# Claude Code local state (worktrees, installer-created skill symlinks)
+.claude/
+
+# Local reference media
+*.m4a
+*.mp4
+!site/public/videos/*.mp4
+
+# Personal resume (local only)
+don_franco_ramos_resume.md

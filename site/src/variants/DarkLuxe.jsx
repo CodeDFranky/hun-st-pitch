@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useInView } from 'framer-motion'
 import './DarkLuxe.css'
 
-const ease = [0.25, 0.1, 0.25, 1]
+const ease = [0.165, 0.84, 0.44, 1]
 
 function FadeIn({ children, className, delay = 0, as = 'div' }) {
   const ref = useRef(null)
@@ -22,31 +22,31 @@ function FadeIn({ children, className, delay = 0, as = 'div' }) {
 }
 
 const ARCH_ITEMS = [
-  { n: '01', title: 'Memory Architecture', desc: "Compounds across businesses — what Studio learns can inform Table One's feasibility models." },
-  { n: '02', title: 'Evaluation Built In', desc: 'Every agent has observability. You know when one fails before it matters.' },
+  { n: '01', title: 'Memory Architecture', desc: "Compounds across businesses, so what Studio learns can inform Table One's feasibility models." },
+  { n: '02', title: 'Evaluation Built In', desc: 'Every agent has observability, so you hear about a fail before it matters.' },
   { n: '03', title: 'Cross-Business Learning', desc: "No Filter's performance data sharpens the brand voice layer over time." },
   { n: '04', title: 'Documentation First', desc: 'Architecture that survives a two-week holiday and scales beyond one person.' },
 ]
 
 const WHY_ITEMS = [
-  { title: "I've shipped this — not prototypes, not demos.", body: "Real systems running daily workflows for real businesses. I know where the failure modes are because I've already hit most of them." },
-  { title: "Hospitality isn't a generic context to me.", body: "I know what good creative output looks like, where AI lifts the needle, and where it creates noise. Studio, Table One, and No Filter each deserve specific thinking." },
-  { title: "You won't need a translator.", body: "I can walk through every architecture call — why an agent works, why one didn't, what I'd change. Clear explanations are part of the job." },
-  { title: "I'll always have a view — and change it if you're right.", body: "On tools, architecture, sequencing, tradeoffs. I'll back every decision up and update it when the evidence shifts." },
+  { title: "I've built this kind of system in production.", body: "At Simple.biz I'm leading development of a legal case management SaaS for Social Security Disability law firms, case intake through hearing. AI document intelligence on AWS, hearing transcription via Deepgram, daily use by a real practice." },
+  { title: "Hospitality and design aren't generic to me.", body: "At Luxury Presence I've built 300+ client sites for U.S. real estate brokerages. It taught me what good creative output looks like, and where AI helps versus where it just makes noise. Studio, Table One, and No Filter each deserve their own thinking." },
+  { title: "We can talk through the work directly.", body: "I can walk you through every architecture call: what's working, what isn't, what I'd change. Clear explanations are part of the job." },
+  { title: "I'll have a view, and update it when I'm wrong.", body: "On tools, architecture, sequencing, tradeoffs. I'll back every choice up, and I'll change it when the evidence shifts." },
 ]
 
 const NF_SERVICES = [
-  { h: 'Brand Voice', p: 'Interviews to voice guide to enforcement layer across all content output.', long: 'A repeatable pipeline that captures how a founder actually speaks, codifies it into a voice guide, and enforces it at every content surface — so the brand stays consistent whether one person ships or ten do.' },
-  { h: 'Content Pipeline', p: 'LinkedIn, Instagram, EDM, short-form — calibrated per client voice.', long: 'A multi-channel content engine where every output is calibrated against the voice layer first. Same idea, different shape, per platform — never the same post stretched four ways.' },
-  { h: 'Performance Reporting', p: 'Meta, Google, LinkedIn Ads pulled into client-ready narrative insights.', long: 'Paid media data pulled, normalised, and translated into the story behind the numbers — what worked, what didn\'t, what to test next. Less dashboard, more decision support.' },
-  { h: 'AI-Search & SEO', p: 'GEO/AEO — keyword clustering, content briefs, schema markup.', long: 'Generative engine optimisation for the new search layer: clustering, structured briefs, schema markup. Built so the brand shows up when an LLM is the one answering the question.' },
+  { h: 'Brand Voice', p: 'Interviews to voice guide to enforcement layer across all content output.', long: "A repeatable pipeline that captures how a founder actually speaks, codifies it into a voice guide, and enforces it at every content surface. The brand stays consistent whether one person ships or ten do." },
+  { h: 'Content Pipeline', p: 'LinkedIn, Instagram, EDM, short-form, calibrated per client voice.', long: 'A multi-channel content engine where every output is calibrated against the voice layer first. Same idea, different shape per platform. Never the same post stretched four ways.' },
+  { h: 'Performance Reporting', p: 'Meta, Google, LinkedIn Ads pulled into client-ready narrative insights.', long: "Paid media data pulled, normalised, and translated into the story behind the numbers: what worked, what didn't, what to test next. Less dashboard, more decision support." },
+  { h: 'AI-Search & SEO', p: 'GEO/AEO. Keyword clustering, content briefs, schema markup.', long: 'Generative engine optimisation for the new search layer: clustering, structured briefs, schema markup. Built so the brand shows up when an LLM is the one answering the question.' },
 ]
 
 const NF_CYCLE_MS = 5000
 
 const STUDIO_SYSTEMS = [
-  { title: 'Project Workspace Generation', gloss: 'Spin a fully-scoped Notion + Drive workspace from a single brief.' },
-  { title: 'Cost Planning Agent', gloss: 'Sketch in, v0 cost plan out — sized against current builder rates.' },
+  { title: 'Project Workspace Generation', gloss: 'Spin a fully-scoped Notion and Drive workspace from a single brief.' },
+  { title: 'Cost Planning Agent', gloss: 'Sketch in, v0 cost plan out, sized against current builder rates.' },
   { title: 'Builder Budget Revision Loop', gloss: 'Quote diffs reconciled against the live plan in one pass.' },
   { title: 'Weekly Client Status Layer', gloss: 'Auto-drafted update with risks, decisions, and next-week asks.' },
 ]
@@ -56,30 +56,30 @@ const STUDIO_CLIENTS = ["All'Antico Vinaio", 'Racqueteer', 'Sea Salt Clovelly', 
 const TABLEONE_LEDGER = [
   {
     title: 'Feasibility Modelling Agent',
-    gloss: 'Site to model in days. Capex, opex, breakeven, sensitivity — defensible at the table.',
-    video: 'https://videos.pexels.com/video-files/5264261/5264261-hd_1920_1080_25fps.mp4',
-    poster: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&auto=format&q=80',
+    gloss: 'Site to model in days. Capex, opex, breakeven, sensitivity, ready to talk through.',
+    video: '/videos/tableone-feasibility.mp4',
+    poster: '/images/tableone-feasibility-poster.jpg',
     place: 'Feasibility · Live Model',
   },
   {
     title: 'Fee Proposal Generator',
-    gloss: 'Brief in, proposal out. Scope, fee structure, deliverable matrix — drafted in voice.',
-    video: 'https://videos.pexels.com/video-files/4109049/4109049-hd_1920_1080_30fps.mp4',
-    poster: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&auto=format&q=80',
+    gloss: 'Brief in, proposal out. Scope, fee structure, deliverable matrix, drafted in voice.',
+    video: '/videos/studio-build.mp4',
+    poster: '/images/studio-poster.jpg',
     place: 'Proposal · In Draft',
   },
   {
     title: 'Pipeline Rhythm in Streak',
     gloss: 'Live deal flow with feasibility status, lease stage, and decision owners surfaced weekly.',
-    video: 'https://videos.pexels.com/video-files/3571264/3571264-hd_1920_1080_25fps.mp4',
-    poster: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1600&auto=format&q=80',
+    video: '/videos/nofilter-bg.mp4',
+    poster: '/images/nofilter-poster.jpg',
     place: 'Pipeline · This Week',
   },
   {
     title: 'Investor Deck Drafting Layer',
     gloss: 'One investor pack from the same model. Updated the day the assumptions move.',
-    video: 'https://videos.pexels.com/video-files/856894/856894-hd_1920_1080_25fps.mp4',
-    poster: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600&auto=format&q=80',
+    video: '/videos/hero-loop.mp4',
+    poster: '/images/hero-poster.jpg',
     place: 'Deck · Investor Pack',
   },
 ]
@@ -229,7 +229,7 @@ function TableOneSection() {
         ))}
         <div className="dl-tableone-plate-overlay" />
         <div className="dl-tableone-plate-meta">
-          <span className="dl-tableone-eyebrow">02 — Table One</span>
+          <span className="dl-tableone-eyebrow">02 · Table One</span>
           <span className="dl-tableone-eyebrow-rule" aria-hidden />
           <AnimatePresence mode="wait">
             <motion.span
@@ -249,8 +249,8 @@ function TableOneSection() {
         <div className="dl-tableone-header">
           <h2 className="dl-biz-h2">Hospitality<br />Strategy &amp; Advisory</h2>
           <p className="dl-tableone-prose">
-            Site sourcing through investor decking — feasibility, fees, pipeline, decks.
-            Modelled, drafted, defensible at the table.
+            Site sourcing through investor decking. Feasibility, fees, pipeline, decks,
+            modelled and drafted so the founder only sees what needs his judgment.
           </p>
         </div>
         <ol className="dl-tableone-ledger" role="tablist" aria-label="Table One systems">
@@ -313,7 +313,7 @@ function NFExhibit() {
       onBlur={() => setPaused(false)}
     >
       <div className="dl-nf-header">
-        <p className="dl-label">03 — No Filter</p>
+        <p className="dl-label">03 · No Filter</p>
         <h2 className="dl-nf-h2">Psychology-Led<br />Marketing Studio</h2>
         <p className="dl-nf-sub">Brand voice · Content · Performance · AI-Search</p>
       </div>
@@ -396,9 +396,9 @@ export default function DarkLuxe() {
           muted
           loop
           playsInline
-          poster="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1400&auto=format&q=85"
+          poster="/images/hero-poster.jpg"
         >
-          <source src="https://videos.pexels.com/video-files/856894/856894-hd_1920_1080_25fps.mp4" type="video/mp4" />
+          <source src="/videos/hero-loop.mp4" type="video/mp4" />
         </video>
         <div className="dl-hero-video-overlay" />
         <div className="dl-hero-text">
@@ -410,14 +410,14 @@ export default function DarkLuxe() {
           <motion.h1 className="dl-hero-h1"
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.5, ease }}>
-            Architecture<br />first. <em>Output</em><br />second.
+            Building AI<br />for work<br /><em>that moves.</em>
           </motion.h1>
           <motion.p className="dl-hero-body"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.9 }}>
-            I design and ship AI and automation systems for founder-led businesses
-            in hospitality, design, and growth. I own the stack, build the agents,
-            and teach the team.
+            Full-stack developer working in AI automation, building production systems
+            that actually do something. I'd love to bring that to Hunt St's three
+            businesses, and I've sketched out what I'd build for each.
           </motion.p>
           <motion.a href="#studio" className="dl-btn"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }}
@@ -434,11 +434,11 @@ export default function DarkLuxe() {
         <section id="studio" className="dl-studio">
           <div className="dl-studio-inner">
             <div className="dl-studio-copy">
-              <p className="dl-biz-num">01 — Studio</p>
+              <p className="dl-biz-num">01 · Studio</p>
               <h2 className="dl-biz-h2">Hospitality<br />&amp; Retail Design</h2>
               <p className="dl-studio-prose">
                 Design files turned into ops. Workspaces, cost plans, builder loops,
-                weekly status — running so the team ships without me in the room.
+                weekly status, so the team keeps shipping even when nobody's in the room.
               </p>
               <ul className="dl-studio-ledger">
                 {STUDIO_SYSTEMS.map((item, i) => (
@@ -461,8 +461,8 @@ export default function DarkLuxe() {
             <div className="dl-studio-vitrine">
               <div className="dl-studio-vitrine-frame">
                 <video autoPlay muted loop playsInline
-                  poster="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&auto=format&q=80">
-                  <source src="https://videos.pexels.com/video-files/4109049/4109049-hd_1920_1080_30fps.mp4" type="video/mp4" />
+                  poster="/images/studio-poster.jpg">
+                  <source src="/videos/studio-build.mp4" type="video/mp4" />
                 </video>
                 <span className="dl-studio-vitrine-tag">Studio · Live Build</span>
               </div>
@@ -491,8 +491,8 @@ export default function DarkLuxe() {
         <section id="nofilter" className="dl-nf">
           <div className="dl-nf-bg">
             <video autoPlay muted loop playsInline
-              poster="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1400&auto=format&q=80">
-              <source src="https://videos.pexels.com/video-files/3571264/3571264-hd_1920_1080_25fps.mp4" type="video/mp4" />
+              poster="/images/nofilter-poster.jpg">
+              <source src="/videos/nofilter-bg.mp4" type="video/mp4" />
             </video>
           </div>
           <NFExhibit />
@@ -503,19 +503,19 @@ export default function DarkLuxe() {
       <FadeIn>
         <section className="dl-arch">
           <video className="dl-arch-video" autoPlay muted loop playsInline
-            poster="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=1600&auto=format&q=80">
-            <source src="https://videos.pexels.com/video-files/2882090/2882090-hd_1920_1080_30fps.mp4" type="video/mp4" />
+            poster="/images/arch-poster.jpg">
+            <source src="/videos/arch-layer.mp4" type="video/mp4" />
           </video>
           <div className="dl-arch-overlay" />
           <div className="dl-arch-inner">
             <h2 className="dl-arch-h2">
               One AI layer.<br />
               Three businesses.<br />
-              <em>Full ownership.</em>
+              <em>Shared from day one.</em>
             </h2>
             <p className="dl-arch-body">
-              I don't build isolated tools. I build a connected operating layer — shared memory,
-              consistent evaluation, common integrations — that compounds over time.
+              Isolated tools don't compound. A connected operating layer does: shared memory,
+              consistent evaluation, common integrations that get sharper with use.
             </p>
             <ArchStrip />
           </div>
@@ -529,9 +529,9 @@ export default function DarkLuxe() {
             <div className="dl-why-statement">
               <p className="dl-why-over">Why me</p>
               <h2 className="dl-why-h2">
-                I think at<br />architecture level.<br />I ship at <em>"live by Friday."</em>
+                Architecture-level<br />thinking.<br />Live <em>by Friday.</em>
               </h2>
-              <p className="dl-why-lead">I can explain every call we make together — from architecture to implementation to what I'd change. That transparency is part of the job.</p>
+              <p className="dl-why-lead">I can explain every call we'd make together: architecture, implementation, what I'd change. Transparency is part of the job.</p>
             </div>
             <WhyAccordion />
           </div>
@@ -542,13 +542,13 @@ export default function DarkLuxe() {
       <FadeIn>
         <section id="contact" className="dl-cta">
           <video className="dl-cta-video" autoPlay muted loop playsInline
-            poster="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1400&auto=format&q=80">
-            <source src="https://videos.pexels.com/video-files/856894/856894-hd_1920_1080_25fps.mp4" type="video/mp4" />
+            poster="/images/hero-poster.jpg">
+            <source src="/videos/hero-loop.mp4" type="video/mp4" />
           </video>
           <div className="dl-cta-inner">
-            <h2 className="dl-cta-h2">Ready to own<br />the AI layer?</h2>
+            <h2 className="dl-cta-h2">Want to build<br />this together?</h2>
             <p className="dl-cta-body">
-              Available for a conversation, a working session, or a practical assessment — in whatever order makes sense for you.
+              Happy to start with a conversation, a working session, or a practical assessment, in whatever order makes sense.
             </p>
             <a href="mailto:d.franco.ramos1@gmail.com" className="dl-cta-email">
               d.franco.ramos1@gmail.com
@@ -558,7 +558,7 @@ export default function DarkLuxe() {
               Get in touch
             </a>
             <p className="dl-built">
-              Built with Claude Code + TasteSkill v2 + Impeccable
+              Built in under 24 hours with Claude Code · brief and content mine, design fully delegated to the AI
             </p>
           </div>
         </section>
@@ -566,8 +566,8 @@ export default function DarkLuxe() {
 
       {/* ── Footer ────────────────────────── */}
       <footer className="dl-footer">
-        <p>Franco Ramos — AI Architect</p>
-        <p>Hunt St Assessment — 2025</p>
+        <p>Franco Ramos · AI Architect</p>
+        <p>For Hunt St · 2026</p>
       </footer>
 
     </div>
