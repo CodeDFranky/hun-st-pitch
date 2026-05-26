@@ -275,8 +275,6 @@ function NFSection() {
     <section
       id="nofilter"
       className="dl-nf"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
