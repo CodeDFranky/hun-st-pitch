@@ -529,6 +529,47 @@
   text-transform: uppercase;
 }
 
+/* ── OVERDRIVE: METALLIC SHEEN ─────────────────────────── */
+@property --dl-sheen-pos {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: -30%;
+}
+@keyframes dl-hero-sheen {
+  0%, 12%  { --dl-sheen-pos: -30%; }
+  62%, 100% { --dl-sheen-pos: 130%; }
+}
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .dl-hero-h1 {
+    background: linear-gradient(
+      100deg,
+      #EDE7DE 0%,
+      #c0a97a calc(var(--dl-sheen-pos) - 22%),
+      #fff9ee var(--dl-sheen-pos),
+      #c0a97a calc(var(--dl-sheen-pos) + 22%),
+      #EDE7DE 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: dl-hero-sheen 10s ease-in-out 1.5s infinite;
+  }
+  .dl-hero-h1 em { color: inherit; }
+}
+
+/* ── OVERDRIVE: SCROLL-DRIVEN REVEALS ─────────────────── */
+@supports (animation-timeline: view()) {
+  @keyframes dl-image-reveal {
+    from { clip-path: inset(0 0 100% 0); }
+    to   { clip-path: inset(0 0 0% 0); }
+  }
+  .dl-biz-img {
+    animation: dl-image-reveal linear both;
+    animation-timeline: view(block);
+    animation-range: entry 5% entry 72%;
+  }
+}
+
 /* ── RESPONSIVE ──────────────────────── */
 @media (max-width: 900px) {
   .dl-nav { padding: 1.25rem 1.5rem; }
@@ -560,4 +601,11 @@
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+  .dl-hero-h1 {
+    animation: none !important;
+    background: none !important;
+    color: var(--text) !important;
+  }
+  .dl-hero-h1 em { color: var(--accent) !important; }
+  .dl-biz-img { animation: none !important; clip-path: none !important; }
 }

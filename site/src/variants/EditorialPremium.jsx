@@ -1,6 +1,10 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
 import './EditorialPremium.css'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 /* MOTION_INTENSITY: 3 — word-level hero stagger, viewport list animations, arch/why entry stagger. */
 
@@ -80,6 +84,37 @@ const ARCH_DATA = [
 ]
 
 export default function EditorialPremium() {
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const ctx = gsap.context(() => {
+      gsap.from('.ep-arch-entry', {
+        x: 80,
+        opacity: 0,
+        stagger: 0.18,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.ep-arch-rest',
+          start: 'top 72%',
+          end: 'bottom 38%',
+          scrub: 0.9,
+        },
+      })
+      gsap.utils.toArray('.ep-biz-h2, .ep-nf-h2').forEach((el) => {
+        gsap.from(el, {
+          clipPath: 'inset(0 0 100% 0)',
+          ease: 'power4.inOut',
+          duration: 1.1,
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 88%',
+            toggleActions: 'play none none none',
+          },
+        })
+      })
+    })
+    return () => ctx.revert()
+  }, [])
+
   return (
     <div className="ep">
 
@@ -223,18 +258,11 @@ export default function EditorialPremium() {
               </motion.div>
             </div>
             <div className="ep-arch-rest">
-              {ARCH_DATA.slice(1).map((item, i) => (
-                <motion.div
-                  key={item.h}
-                  className="ep-arch-entry"
-                  initial={{ opacity: 0, y: 14 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: (i + 1) * 0.1 }}
-                >
+              {ARCH_DATA.slice(1).map((item) => (
+                <div key={item.h} className="ep-arch-entry">
                   <h4>{item.h}</h4>
                   <p>{item.p}</p>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>

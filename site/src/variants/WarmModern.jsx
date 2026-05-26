@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
 import './WarmModern.css'
 
 /* MOTION_INTENSITY: 5 — fluid reveals, scroll-driven scale, staggered entries */
@@ -35,6 +35,42 @@ const NF_SERVICES = [
   { h: 'Performance Reporting', p: 'Meta, Google, LinkedIn Ads into client-ready narrative insights.' },
   { h: 'AI-Search & SEO', p: 'GEO/AEO — keyword clustering, content briefs, schema markup.' },
 ]
+
+function MagneticButton({ children, className, href }) {
+  const ref = useRef(null)
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+  const springX = useSpring(x, { stiffness: 150, damping: 15 })
+  const springY = useSpring(y, { stiffness: 150, damping: 15 })
+
+  const handleMouseMove = (e) => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const rect = ref.current.getBoundingClientRect()
+    const cx = rect.left + rect.width / 2
+    const cy = rect.top + rect.height / 2
+    const dx = e.clientX - cx
+    const dy = e.clientY - cy
+    if (Math.sqrt(dx * dx + dy * dy) < 80) {
+      x.set(dx * 0.4)
+      y.set(dy * 0.4)
+    }
+  }
+
+  const handleMouseLeave = () => { x.set(0); y.set(0) }
+
+  return (
+    <motion.a
+      ref={ref}
+      href={href}
+      className={className}
+      style={{ x: springX, y: springY }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      {children}
+    </motion.a>
+  )
+}
 
 export default function WarmModern() {
   const heroRef = useRef(null)
@@ -90,7 +126,15 @@ export default function WarmModern() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 1.1 }}
           >
-            <a href="#systems" className="wm-btn-primary">See what I'd build</a>
+            <motion.a
+              href="#systems"
+              className="wm-btn-primary"
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: 'spring', stiffness: 380, damping: 18 }}
+            >
+              See what I'd build
+            </motion.a>
             <a href="#contact" className="wm-btn-secondary">Get in touch ›</a>
           </motion.div>
         </div>
@@ -289,6 +333,7 @@ export default function WarmModern() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-5% 0px' }}
               transition={{ duration: 0.7, delay: Math.floor(i / 2) * 0.12, ease: [0.25, 0.1, 0.25, 1] }}
+              whileHover={{ y: -3, transition: { type: 'spring', stiffness: 400, damping: 22 } }}
             >
               <span className="wm-why-ghost-n" aria-hidden="true">0{i + 1}</span>
               <div className="wm-why-entry-content">
@@ -314,9 +359,9 @@ export default function WarmModern() {
             d.franco.ramos1@gmail.com
           </a>
           <br />
-          <a href="mailto:d.franco.ramos1@gmail.com" className="wm-btn-cta">
+          <MagneticButton href="mailto:d.franco.ramos1@gmail.com" className="wm-btn-cta">
             Get in touch
-          </a>
+          </MagneticButton>
           <p className="wm-built">Built with Claude Code + TasteSkill v2 + Impeccable</p>
         </section>
       </Reveal>
