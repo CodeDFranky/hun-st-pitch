@@ -72,7 +72,7 @@
   color: var(--accent) !important;
   border: 1px solid var(--accent-border);
   padding: 0.4rem 1.1rem;
-  transition: background 0.25s ease, color 0.25s ease !important;
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease !important;
 }
 .dl-nav-cta:hover {
   background: var(--accent) !important;
@@ -829,16 +829,6 @@
 }
 .dl-arch-h2-wrap {
   position: relative;
-  padding-left: 1.75rem;
-}
-.dl-arch-thread {
-  position: absolute;
-  left: 0;
-  top: 0.06em;
-  bottom: 0.06em;
-  width: 1px;
-  background: var(--accent);
-  transform-origin: top center;
 }
 .dl-arch-line {
   display: block;
@@ -997,7 +987,7 @@
 .dl-why-h2 {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2rem, 3.5vw, 3.5rem);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.1;
   color: var(--text);
   margin-bottom: 2rem;
@@ -1012,16 +1002,6 @@
 }
 .dl-why-statement {
   position: relative;
-  padding-left: 1.75rem;
-}
-.dl-why-statement::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.06em;
-  bottom: 2rem;
-  width: 1px;
-  background: var(--accent);
 }
 .dl-why-items {
   display: flex;
@@ -1148,7 +1128,7 @@
 .dl-cta-h2 {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(3rem, 5vw, 5rem);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.05;
   color: var(--text);
   margin-bottom: 2rem;
@@ -1158,7 +1138,7 @@
   color: var(--accent);
 }
 .dl-cta-body {
-  font-size: 0.92rem;
+  font-size: 1rem;
   font-weight: 300;
   color: var(--muted);
   max-width: 42ch;
@@ -1181,15 +1161,25 @@
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--bg);
-  background: linear-gradient(to left, var(--accent-light) 50%, var(--accent) 50%);
-  background-size: 200% 100%;
-  background-position: right center;
-  padding: 1.1rem 3rem;
-  transition: background-position 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+  padding: 1.1rem 3.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s ease;
   margin-bottom: 5rem;
 }
-.dl-btn-filled:hover { background-position: left center; }
+.dl-btn-filled::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: translateX(-101%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+.dl-btn-filled:hover { color: var(--bg); }
+.dl-btn-filled:hover::before { transform: translateX(0); }
 .dl-built {
   font-size: 0.68rem;
   font-weight: 300;
@@ -1335,8 +1325,6 @@
   .dl-arch-panel--03, .dl-arch-panel--04 { grid-column: auto; grid-row: auto; }
   .dl-why { padding: 5rem 1.5rem; }
   .dl-why-split { grid-template-columns: 1fr; gap: 3rem; }
-  .dl-why-statement { padding-left: 0; }
-  .dl-why-statement::before { display: none; }
   .dl-why-trigger-label { font-size: 1.2rem; }
   .dl-cta { padding: 6rem 1.5rem; }
   .dl-footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
@@ -1409,7 +1397,6 @@
   .dl-arch-panel-img { transition: filter 0.01ms !important; transform: scale(1) !important; }
   .dl-arch-panel-d { opacity: 1 !important; transform: translateY(0) !important; transition: none !important; }
   .dl-arch-line { opacity: 1 !important; transform: none !important; }
-  .dl-arch-thread { transform: none !important; }
   .dl-why-mark { transform: none !important; }
   .dl-why::before { animation: none !important; }
   .dl-hero-video, .dl-nf-bg-video, .dl-cta-video {

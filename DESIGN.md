@@ -32,14 +32,15 @@ Never use raw `rgba()` for these values inline. Always reference a token. New op
 
 **Heading scale:**
 
-| Role | Class | Size |
-|---|---|---|
-| Hero h1 | `.dl-hero-h1` | `clamp(3.5rem, 5.5vw, 6rem)` |
-| Arch h2 | `.dl-arch-h2` | `clamp(3rem, 5vw, 5.5rem)` |
-| CTA h2 | `.dl-cta-h2` | `clamp(3rem, 5vw, 5rem)` |
-| Section h2 (all three businesses + Why) | `.dl-biz-h2` / `.dl-nf-h2` / `.dl-why-h2` | `clamp(2rem, 3.5vw, 3.5rem)` |
+| Role | Class | Size | Weight |
+|---|---|---|---|
+| Hero h1 | `.dl-hero-h1` | `clamp(3.5rem, 5.5vw, 6rem)` | 300 |
+| Arch h2 | `.dl-arch-h2` | `clamp(3rem, 5vw, 5.5rem)` | 300 |
+| CTA h2 | `.dl-cta-h2` | `clamp(3rem, 5vw, 5rem)` | **400** |
+| Section h2 (Studio, Table One, No Filter) | `.dl-biz-h2` / `.dl-nf-h2` | `clamp(2rem, 3.5vw, 3.5rem)` | 300 |
+| Why h2 | `.dl-why-h2` | `clamp(2rem, 3.5vw, 3.5rem)` | **400** |
 
-All three business sections (Studio, Table One, No Filter) and the Why section are the same tier. They use the same heading scale. Do not differentiate them by size.
+Weight escalates toward the end of the page: content sections are 300 (descriptive), Why and CTA are 400 (assertive). Do not change weights back to 300 — the progression is intentional.
 
 **Body text — two sizes only:**
 
@@ -68,23 +69,11 @@ Three classes exist (`.dl-label`, `.dl-biz-num`, `.dl-why-over`) — all must us
 
 ## Accent lines
 
-**Structural vertical lines** (left-side thread decorations beside headings):
+**Horizontal dividers within components** (e.g. `.dl-why-rule`): may use `linear-gradient(to right, var(--accent), transparent)` — fades out rather than stripes.
 
-```css
-position: absolute;
-left: 0;
-top: 0.06em;
-width: 1px;
-background: var(--accent);   /* SOLID — never a gradient */
-```
+**Animated UI indicators** (e.g. `.dl-hero-scroll-line`): may use directional gradients.
 
-Used in: `.dl-arch-thread` (animated scaleY via Framer Motion), `.dl-why-statement::before`.
-
-**Rule:** These lines are always solid `var(--accent)`. The animation provides dynamism on the arch thread — gradient on top of animation is redundant. A static pseudo-element does not need a gradient as a substitute for dynamism; solid is more honest and more consistent with every other 1px accent in the design (vitrine corner brackets, section borders, nav border).
-
-**Horizontal dividers within components** (e.g. `.dl-why-rule`): may use `linear-gradient(to right, var(--accent), transparent)` — different category, different purpose.
-
-**Animated UI indicators** (e.g. `.dl-hero-scroll-line`): may use directional gradients — different category.
+**No left-side stripe lines.** The arch heading thread and why-statement left line have been removed. A 1px `position: absolute` stripe next to a heading is the same slop pattern as `border-left` on a card — it reads as AI scaffolding. Do not reintroduce these on any new section.
 
 ---
 
@@ -95,9 +84,14 @@ Used in: `.dl-arch-thread` (animated scaleY via Framer Motion), `.dl-why-stateme
 **Corner brackets:** `::before` (top-left) and `::after` (bottom-right), `1.4rem × 1.4rem`, solid `var(--accent)`, `1px` border on two sides each. Both vitrines share this treatment identically.
 
 **Buttons:**
-- `.dl-btn` — outline with slide-fill on hover (hero)
-- `.dl-btn-filled` — solid fill with accent-light gradient shift on hover (CTA)
-- `.dl-nav-cta` — compact outline in nav
+
+All three share the same visual grammar: ghost outline at rest, fill on hover. Differentiated by size and weight only.
+
+- `.dl-btn` — outline, slide-fill `::before` on hover, `color: var(--accent)` at rest, `color: var(--bg)` on hover (hero)
+- `.dl-btn-filled` — same outline + slide-fill mechanic, `font-weight: 500`, more generous padding `1.1rem 3.5rem` (CTA)
+- `.dl-nav-cta` — compact outline, direct background fill on hover (no `::before`), `transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1)` (nav)
+
+Never use a solid/opaque background for a button at rest. The slide-fill IS the hover moment.
 
 ---
 

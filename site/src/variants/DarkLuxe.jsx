@@ -17,10 +17,6 @@ const archLineVariants = {
   hidden: { opacity: 0, y: 18, x: -8 },
   visible: { opacity: 1, y: 0, x: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } }
 }
-const archThreadVariants = {
-  hidden: { scaleY: 0 },
-  visible: { scaleY: 1, transition: { duration: 0.65, delay: 0.5, ease: [0.16, 1, 0.3, 1] } }
-}
 
 function FadeIn({ children, className, delay = 0, as = 'div' }) {
   const ref = useRef(null)
@@ -83,13 +79,6 @@ function ArchHeading() {
   const inView = useInView(ref, { once: true, margin: '-12% 0px' })
   return (
     <div className="dl-arch-h2-wrap" ref={ref}>
-      <motion.span
-        className="dl-arch-thread"
-        aria-hidden="true"
-        variants={archThreadVariants}
-        initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
-      />
       <motion.h2
         className="dl-arch-h2"
         variants={archHdVariants}
