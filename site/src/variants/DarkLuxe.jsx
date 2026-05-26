@@ -397,6 +397,24 @@ export default function DarkLuxe() {
     return () => document.removeEventListener('keydown', onKey)
   }, [])
 
+  useEffect(() => {
+    if (!menuOpen) return
+    const onTab = (e) => {
+      if (e.key !== 'Tab') return
+      const focusable = [...(drawerRef.current?.querySelectorAll('a') ?? [])]
+      if (!focusable.length) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus() }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus() }
+      }
+    }
+    document.addEventListener('keydown', onTab)
+    return () => document.removeEventListener('keydown', onTab)
+  }, [menuOpen])
+
   // Pause scroll while drawer is open. overscroll-behavior:none stops iOS
   // momentum scroll-through without touching layout (no position:fixed needed).
   useEffect(() => {
@@ -450,9 +468,10 @@ export default function DarkLuxe() {
     })
     window.__lenis = lenis
     const updateParallax = () => {
-      document.querySelectorAll('[data-parallax]').forEach(v => {
-        const container = v.closest('section') ?? v.parentElement
-        const rect = container.getBoundingClientRect()
+      const els = [...document.querySelectorAll('[data-parallax]')]
+      const rects = els.map(v => (v.closest('section') ?? v.parentElement).getBoundingClientRect())
+      els.forEach((v, i) => {
+        const rect = rects[i]
         const offset = (rect.top + rect.height / 2 - window.innerHeight / 2) / (window.innerHeight + rect.height)
         v.style.transform = `translateY(${offset * 25}%)`
       })
@@ -509,7 +528,7 @@ export default function DarkLuxe() {
     <div className="dl">
 
       {/* ── Nav ───────────────────────────── */}
-      <nav className={`dl-nav${(scrolled || menuOpen) ? ' dl-nav--scrolled' : ''}`}>
+      <nav aria-label="Main" className={`dl-nav${(scrolled || menuOpen) ? ' dl-nav--scrolled' : ''}`}>
         <span className="dl-nav-brand">Franco Ramos</span>
         <ul className="dl-nav-links">
           {NAV_LINKS.map(({ href, label }) => (

@@ -20,6 +20,7 @@ export default function Cursor() {
     const onMove = (e) => {
       pos.current = { x: e.clientX, y: e.clientY }
       dot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
+      if (!rafRef.current) rafRef.current = requestAnimationFrame(tick)
     }
 
     const onOver = (e) => {
@@ -40,9 +41,15 @@ export default function Cursor() {
       lerped.current.x += (pos.current.x - lerped.current.x) * LERP
       lerped.current.y += (pos.current.y - lerped.current.y) * LERP
       ring.style.transform = `translate(${lerped.current.x}px, ${lerped.current.y}px)`
+      if (
+        Math.abs(pos.current.x - lerped.current.x) < 0.1 &&
+        Math.abs(pos.current.y - lerped.current.y) < 0.1
+      ) {
+        rafRef.current = null
+        return
+      }
       rafRef.current = requestAnimationFrame(tick)
     }
-    rafRef.current = requestAnimationFrame(tick)
 
     return () => {
       cancelAnimationFrame(rafRef.current)
